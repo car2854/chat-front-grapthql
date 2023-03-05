@@ -1,0 +1,58 @@
+<div class="page">
+  <aside>
+    
+    <div class="user-name">
+      <div class="info">
+        <div class="photo"></div>
+        <h3>{{user.name}}</h3>
+      </div>
+      <button>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    
+    <div class="search">
+      <div class="icon-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <input type="text" placeholder="Buscar....">
+    </div>
+
+    <div class="contacts">
+      <ul>
+        <li *ngFor="let interaction of convertInteractionToUserInteractions(interactions)">
+          <a [routerLink]="[ '/main/', interaction.user.id ]">
+            <div class="contact">
+              <div class="photo"></div>
+              <h5>{{interaction.user.name}}</h5>
+            </div>
+          </a>
+        </li>
+
+
+        <!-- <li>
+          <a [routerLink]="[ '/main', 4 ]">
+            <div class="contact">
+              <div class="photo"></div>
+              <h5>Grupo 2</h5>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="[ '/main', 5 ]">
+            <div class="contact">
+              <div class="photo"></div>
+              <h5>Usuario 3</h5>
+            </div>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+
+
+  </aside>
+  
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

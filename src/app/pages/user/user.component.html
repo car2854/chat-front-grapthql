@@ -1,0 +1,75 @@
+<div class="profile-detail">
+  <div class="image">
+
+  </div>
+  <div class="profile-name">
+    <h1>{{interaction.user_from.id === user.id ? interaction.user_to.name : interaction.user_from.name}}</h1>
+    <p>Estado</p>
+  </div>
+  <button>
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</div>
+
+<div class="chat">
+
+  <div class="messages">
+
+
+    <ng-container *ngFor="let chat of chats">
+
+      
+      <ng-container *ngIf="chat.user_from.id === user.id; else elseFrom">
+        <div class="message from">
+          <p>{{chat.message}}</p>
+        </div>
+      </ng-container>
+
+      <ng-template #elseFrom>
+        <div class="message to">
+          <p>{{chat.message}}</p>
+        </div>
+      </ng-template>
+      
+
+
+
+    </ng-container>
+
+    <!-- 
+      <div class="message from">
+        <p>Me alegro mucho la verdad :)</p>
+      </div> 
+    -->
+
+
+
+  </div>
+
+  <form autocomplete="off" [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+    <div class="input-chat">
+      
+      <ng-container *ngIf="isLocked();">
+        <small class="text-center">Bloqueaste a este usuario</small>
+      </ng-container>
+
+      <ng-container *ngIf="youWereBlocked();">
+        <small class="text-center">Este usuario te a bloqueado</small>
+      </ng-container>
+
+
+
+      <ng-template *ngIf="isActive()">
+        <input type="text" formControlName="message">
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+        <button type="button"><i class="fa-solid fa-image"></i></button>
+      </ng-template>
+      
+
+      
+      
+    </div>
+  </form>
+  
+
+</div>

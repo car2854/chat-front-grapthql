@@ -1,0 +1,12 @@
+$color1: #222E35;
+$color2: #202C33;
+$color3: #111B21;
+$color-border: #222D34;
+
+.auth-page{
+  padding-inline: 320px;
+  background-color: $color3;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}

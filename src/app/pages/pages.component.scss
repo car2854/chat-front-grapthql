@@ -1,0 +1,117 @@
+$color1: #222E35;
+$color2: #202C33;
+$color3: #111B21;
+$color-border: #222D34;
+
+.page{
+  height: 100vh;
+  background-color: #313D45;
+  
+  aside{
+    position: fixed;
+    background-color: $color3;
+    color: white;
+    width: 380px;
+    height: 100vh;
+    border-right: 1px solid #313D45;
+    .user-name{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-inline: 18px;
+      padding-block: 12px;
+      border: 1px solid $color-border;
+      height: 180px;
+      .info{
+        align-items: center;
+        display: flex;
+        gap: 8px;
+        .photo{
+          background-color: white;
+          border: 1px solid $color-border;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+      }
+      button{
+        color: white;
+        border: none;
+        background-color: #00000000;
+        i{
+          font-size: 24px;
+        }
+      }
+    }
+  
+    .search{
+      margin-inline: 8px;
+      margin-block: 8px;
+      padding-inline: 8px;
+      padding-block: 4px;
+      display: flex;
+      align-items: center;
+      background-color: $color2;
+      border-radius: 5px;
+      input{
+        width: 100%;
+        background-color: #00000000;
+        border: none;
+        font-size: 14px;
+        color: white;
+      }
+      input:focus{
+        outline: none;
+      }
+      input::placeholder{
+        color: white;
+        opacity: 0.5;
+      }
+      .icon-search{
+        width: 26px;
+        text-align: center;
+      }
+  
+    }
+    
+    .contacts{
+      ul{
+        padding: 0px;
+        list-style: none;
+        text-align: center;
+        li{      
+          a{
+            text-decoration: none;
+            color: white;
+            .contact{
+              border: 1px solid $color-border;
+              display: flex;
+              align-items: center;
+              padding-inline: 24px;
+              padding-block: 8px;
+              gap: 8px;
+              .photo{
+                background-color: white;
+                border: 1px solid $color-border;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+  
+  
+  }
+
+  .content{
+    margin-left: 380px;
+    color: white;
+    height: 100vh;
+  }
+
+}
+
+

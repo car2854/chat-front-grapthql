@@ -6,9 +6,16 @@
     <h1>{{interaction.user_from.id === user.id ? interaction.user_to.name : interaction.user_from.name}}</h1>
     <p>Estado</p>
   </div>
-  <button>
-    <i class="fa-solid fa-bars"></i>
-  </button>
+  <div class="options">
+    <button type="button" (click)="buttonOptionsInteractionUser($event)">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <ul class="select-options hidden">
+      <li>Bloquear</li>
+      <li>Desbloquear</li>
+      <li>Opcion 3</li>
+    </ul>
+  </div>
 </div>
 
 <div class="chat">
@@ -54,7 +61,7 @@
       </ng-container>
 
       <ng-container *ngIf="youWereBlocked();">
-        <small class="text-center">Este usuario te a bloqueado</small>
+        <small class="text-center">Este usuario te ha bloqueado</small>
       </ng-container>
 
 

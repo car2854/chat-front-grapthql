@@ -34,12 +34,24 @@ $color-border: #222D34;
           border-radius: 50%;
         }
       }
-      button{
-        color: white;
-        border: none;
-        background-color: #00000000;
-        i{
-          font-size: 24px;
+      .options-user{
+        button{
+          color: white;
+          border: none;
+          background-color: #00000000;
+          i{
+            font-size: 24px;
+          }
+        }
+        .options{
+          left: 267px;
+          position: absolute;
+          background-color: white;
+          color: black;
+          list-style: none;
+          padding-inline: 12px;
+          padding-block: 3px;
+          border-radius: 2px;
         }
       }
     }

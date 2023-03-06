@@ -6,16 +6,25 @@
         <div class="photo"></div>
         <h3>{{user.name}}</h3>
       </div>
-      <button>
-        <i class="fa-solid fa-bars"></i>
-      </button>
+
+      <div class="options-user">
+        <button (click)="selectOptionsUser($event)">
+          <i class="fa-solid fa-bars"></i>
+        </button> 
+        <ul class="options hidden">
+          <li>Opcion 1</li>
+          <li>Opcion 2</li>
+          <li>Opcion 3</li>
+        </ul>
+      </div>
+
     </div>
     
     <div class="search">
       <div class="icon-search">
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
-      <input type="text" placeholder="Buscar....">
+      <input type="text" placeholder="Buscar...." (input)="changeInput($event)">
     </div>
 
     <div class="contacts">

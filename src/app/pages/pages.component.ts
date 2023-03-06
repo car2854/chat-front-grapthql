@@ -74,4 +74,24 @@ export class PagesComponent {
 
   }
 
+
+  public selectOptionsUser = (event:any) => {
+    const refData = (event.srcElement.classList.contains('fa-bars')) ? event.target.parentElement.parentElement.children[1] : event.target.parentElement.children[1];
+
+    if (refData.classList.contains('hidden')) refData.classList.remove('hidden')
+    else refData.classList.add('hidden');
+  }
+
+  public changeInput = (event:any) => {
+    const userName = event.srcElement.value || '';
+
+    this.interactionSerice.getUsersInteractions(userName)
+    .subscribe({
+      next: (resp:any) => {
+        this.interactions = resp.data.getUsersInteractions;
+      },
+      error: (err:any) => console.log(err)
+    });
+
+  }
 }

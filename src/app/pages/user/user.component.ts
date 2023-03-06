@@ -90,4 +90,12 @@ export class UserComponent {
     console.log(this.chatForm.value);
     this.chatForm.reset(); 
   }
+
+  public buttonOptionsInteractionUser = (event:any) => {
+
+    const refData = (event.srcElement.classList.contains('fa-bars')) ? event.target.parentElement.parentElement.children[1] : event.target.parentElement.children[1];
+
+    if (refData.classList.contains('hidden')) refData.classList.remove('hidden');
+    else refData.classList.add('hidden');
+  }
 }

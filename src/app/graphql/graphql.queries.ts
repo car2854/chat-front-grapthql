@@ -2,8 +2,8 @@ import { gql } from 'apollo-angular';
 
 const USERS_INTERACTION = gql`
 
-  query GetUsersInteractions{
-    getUsersInteractions{
+  query GetUsersInteractions($userName: String){
+    getUsersInteractions(userName: $userName) {
       id,
       status_from,
       status_to,

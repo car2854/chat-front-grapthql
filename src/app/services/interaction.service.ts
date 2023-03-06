@@ -15,9 +15,10 @@ export class InteractionService {
     return localStorage.getItem('token') || '';
   }
 
-  public getUsersInteractions = () => {
+  public getUsersInteractions = (userName: string = '') => {
     return this.apollo.watchQuery<any>({
       query: USERS_INTERACTION,
+      variables: {userName},
       context: {
         headers: {
           // "Content-Type": "application/json",

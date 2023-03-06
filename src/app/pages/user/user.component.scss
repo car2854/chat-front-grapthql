@@ -16,12 +16,24 @@ $color1: #222E35;
     border-radius: 50%;
     background-color: white;
   }
-  button{
-    background-color: #00000000;
-    color: white;
-    border: none;
-    i{
-      font-size: 28px;
+  .options{
+    button{
+      background-color: #00000000;
+      color: white;
+      border: none;
+      i{
+        font-size: 28px;
+      }
+    }
+    .select-options{
+      position: absolute;
+      right: 50px;
+      list-style: none;
+      background-color: #ffffffE0;
+      color: black;
+      padding-inline: 12px;
+      padding-block: 6px;
+      border-radius: 3px;
     }
   }
   .profile-name{
@@ -93,3 +105,4 @@ $color1: #222E35;
   }
 
 }
+

@@ -10,7 +10,8 @@ const LOGIN = gql`
       name,
       email,
       create_at,
-      token
+      token,
+      uid_profile
     }
   }
 `;
@@ -27,7 +28,8 @@ const REGISTER = gql`
       email,
       password,
       create_at,
-      token
+      token,
+      uid_profile
     }
   }
 `;
@@ -39,7 +41,8 @@ const RENEWTOKEN = gql`
       name,
       email,
       create_at,
-      token
+      token,
+      uid_profile
     }
   }
 `;

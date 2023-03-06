@@ -44,14 +44,23 @@ $color-border: #222D34;
           }
         }
         .options{
-          left: 267px;
+          cursor: pointer;
+          user-select: none;
+          left: 225px;
           position: absolute;
           background-color: white;
           color: black;
           list-style: none;
-          padding-inline: 12px;
-          padding-block: 3px;
           border-radius: 2px;
+          padding: 0px;
+          li{
+            padding-inline: 12px;
+            padding-block: 6px;        
+          }
+          li:hover{
+            background-color: #222e35ab;
+            color: white;
+          }
         }
       }
     }
@@ -124,6 +133,19 @@ $color-border: #222D34;
     height: 100vh;
   }
 
+  
 }
+// .modal-component{
+//   position: absolute;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   width: 100vw;
+//   height: 100vh;
+//   top: 0px;
+//   left: 0px;
+
+//   .form-group{
+
+//   }
+// }
 
 

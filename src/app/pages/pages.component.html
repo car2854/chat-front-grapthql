@@ -12,7 +12,7 @@
           <i class="fa-solid fa-bars"></i>
         </button> 
         <ul class="options hidden">
-          <li>Opcion 1</li>
+          <li (click)="newUser($event)">Nuevo Usuario</li>
           <li>Opcion 2</li>
           <li>Opcion 3</li>
         </ul>
@@ -63,5 +63,22 @@
   
   <div class="content">
     <router-outlet></router-outlet>
+    <!-- Button trigger modal -->
   </div>
+  
 </div>
+
+
+<!-- <div class="modal-component">
+  
+  <div>
+    <h1>Modal 1</h1>
+  </div>
+  <div class="form-group">
+    <label for="">Ingrese el id del perfil</label>
+    <input type="text">
+  </div>
+
+</div> -->
+
+

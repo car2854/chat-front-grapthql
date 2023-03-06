@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
 import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
@@ -93,5 +94,35 @@ export class PagesComponent {
       error: (err:any) => console.log(err)
     });
 
+  }
+
+  public newUser = (event:any) => {
+    event.target.parentElement.classList.add('hidden');
+    Swal.fire({
+      title: 'Ingrese el id del usuario',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Look up',
+      showLoaderOnConfirm: true,
+      preConfirm: (uid:number) => {
+        return this.interactionSerice.getUserInteracion(uid)
+          .subscribe({
+            error(err) {
+              console.log(err);
+            },
+            next: (value) => {
+              console.log(value);
+            },
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    })
   }
 }

@@ -59,7 +59,9 @@ const USER_CHAT = gql`
         name
       }
     }
-  }`;
+  }`
+;
+
 
 
 

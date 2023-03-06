@@ -44,5 +44,41 @@ const RENEWTOKEN = gql`
   }
 `;
 
+const LOQUED_USER = gql`
+  mutation LoquedUser($id: Int!){
+    lockedUser(id: $id){
+      id,
+      status_from,
+      status_to,
+      user_from{
+        id,
+        name
+      },
+      user_to{
+        id,
+        name
+      }
+    }
+  }
+`;
 
-export {LOGIN, REGISTER, RENEWTOKEN}
+const CLEAR_STATUS_USER = gql`
+  mutation ClearStatusUser($id: Int!){
+    clearStatusUser(id: $id){
+      id,
+      status_from,
+      status_to,
+      user_from{
+        id,
+        name
+      },
+      user_to{
+        id,
+        name
+      }
+    }
+  }
+`;
+
+
+export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER}

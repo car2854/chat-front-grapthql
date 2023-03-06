@@ -11,8 +11,8 @@
       <i class="fa-solid fa-bars"></i>
     </button>
     <ul class="select-options hidden">
-      <li>Bloquear</li>
-      <li>Desbloquear</li>
+      <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
+      <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>
       <li>Opcion 3</li>
     </ul>
   </div>

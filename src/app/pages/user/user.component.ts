@@ -8,6 +8,7 @@ import UserModule from 'src/app/models/user.module';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { StatusService } from 'src/app/services/status.service';
 
 @Component({
   selector: 'app-user',
@@ -28,6 +29,7 @@ export class UserComponent {
     private interactionService: InteractionService,
     private chatService: ChatService,
     private authService: AuthService,
+    private statusService: StatusService,
     private _activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
     private fb: FormBuilder
@@ -92,10 +94,46 @@ export class UserComponent {
   }
 
   public buttonOptionsInteractionUser = (event:any) => {
-
     const refData = (event.srcElement.classList.contains('fa-bars')) ? event.target.parentElement.parentElement.children[1] : event.target.parentElement.children[1];
-
     if (refData.classList.contains('hidden')) refData.classList.remove('hidden');
     else refData.classList.add('hidden');
   }
+
+  public blockUser = (event:any) => {
+
+    const id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
+    
+    this.statusService.blockUser(id)
+    .subscribe({
+      complete() {
+        event.target.parentElement.classList.add('hidden');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+    
+  }
+  
+  public unBlockUser = (event:any) => {
+    const id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
+
+    this.statusService.clearStatusUser(id)
+      .subscribe({
+        complete() {
+          event.target.parentElement.classList.add('hidden');
+        },
+      });
+  }
+
+  public isBloqued = ():boolean => {
+
+    if (this.interaction.user_from.id === this.user.id){
+      return this.interaction.status_to === StatusInteractionEnum.locked;
+    }else{
+      return this.interaction.status_from === StatusInteractionEnum.locked;
+    }
+
+  }
+
 }

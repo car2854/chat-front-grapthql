@@ -26,14 +26,23 @@ $color1: #222E35;
       }
     }
     .select-options{
+      user-select: none;
+      cursor: pointer;
       position: absolute;
       right: 50px;
       list-style: none;
       background-color: #ffffffE0;
       color: black;
-      padding-inline: 12px;
-      padding-block: 6px;
       border-radius: 3px;
+      padding: 0px;
+      li{
+        padding-inline: 12px;
+        padding-block: 6px;        
+      }
+      li:hover{
+        background-color: #222e35ab;
+        color: white;
+      }
     }
   }
   .profile-name{

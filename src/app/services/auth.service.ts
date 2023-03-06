@@ -27,8 +27,11 @@ export class AuthService {
       variables: data
     }).pipe(
       tap((resp:any) => {
-        this.user = resp.data.login;
-        localStorage.setItem('token', resp.data.login.token);
+
+        const {token, ...data} = resp.data.login;
+
+        this.user = data;
+        localStorage.setItem('token', token);
       })
     )
   }
@@ -39,8 +42,9 @@ export class AuthService {
       variables: data
     }).pipe(
       tap((resp:any) => {
-        this.user = resp.data.register;
-        localStorage.setItem('token', resp.data.register.token);
+        const {token, ...data} = resp.data.register;
+        this.user = data;
+        localStorage.setItem('token', token);
       })
     )
   }
@@ -58,8 +62,9 @@ export class AuthService {
     })
     .pipe(
       map((resp:any) => {
-        this.user = resp.data.renewToken;
-        localStorage.setItem('token', resp.data.renewToken.token);
+        const {token, ...data} = resp.data.renewToken;
+        this.user = data;
+        localStorage.setItem('token', token);
         return true;
       }),
       catchError(err => of(false))

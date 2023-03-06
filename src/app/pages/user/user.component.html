@@ -56,21 +56,21 @@
   <form autocomplete="off" [formGroup]="chatForm" (ngSubmit)="sendMessage()">
     <div class="input-chat">
       
-      <ng-container *ngIf="isLocked();">
+      <ng-container *ngIf="isBlocked()">
         <small class="text-center">Bloqueaste a este usuario</small>
       </ng-container>
 
-      <ng-container *ngIf="youWereBlocked();">
+      <ng-container *ngIf="youWereBlocked()">
         <small class="text-center">Este usuario te ha bloqueado</small>
       </ng-container>
 
 
 
-      <ng-template *ngIf="isActive()">
-        <input type="text" formControlName="message">
+      <ng-container *ngIf="isActive()"> 
+        <input type="text" formControlName="message" formControlName="message">
         <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
         <button type="button"><i class="fa-solid fa-image"></i></button>
-      </ng-template>
+      </ng-container>
       
 
       

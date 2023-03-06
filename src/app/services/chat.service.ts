@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { CREARTE_CHAT } from '../graphql/graphql.mutation';
 import { USER_CHAT } from '../graphql/graphql.queries';
 
 @Injectable({
@@ -30,5 +31,20 @@ export class ChatService {
 
   }
 
+
+  public createChat = (data:any) => {
+
+    return this.apollo.mutate({
+      mutation: CREARTE_CHAT,
+      variables: data,
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    })
+
+  }
 
 }

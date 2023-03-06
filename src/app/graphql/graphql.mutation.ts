@@ -80,5 +80,25 @@ const CLEAR_STATUS_USER = gql`
   }
 `;
 
+const CREARTE_CHAT = gql`
+  mutation CreateChat($message: String!, $userTo: Int!){
+    createChat(newChatInput: {
+      message: $message,
+      userTo: $userTo
+    }){
+      id,
+      message,
+      user_from{
+        id,
+        name
+      },
+      user_to{
+        id,
+        name
+      }
+    }
+  }
+`;
 
-export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER}
+
+export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT}

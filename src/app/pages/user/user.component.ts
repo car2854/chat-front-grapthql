@@ -38,6 +38,7 @@ export class UserComponent {
     // solo cambia su id.
     this._activatedRoute.paramMap.subscribe(params => {
       this.ngOnInit();
+      this.chatForm.reset();
     });
 
   }
@@ -52,7 +53,6 @@ export class UserComponent {
       .subscribe({
         next: (resp:any) => {
           this.interaction = resp.data.findUserInteraction;
-          console.log(this.interaction);
         },
         error(err) {
           console.log(err);
@@ -70,27 +70,23 @@ export class UserComponent {
       })
   }
 
-  public isLocked = () : boolean => {
-    if (this.interaction.user_from.id === this.user.id && this.interaction.status_to === StatusInteractionEnum.locked) return true;
-    if (this.interaction.status_from === StatusInteractionEnum.locked) return true;
+  public isBlocked = () : boolean => {
+    if (
+      (this.interaction.user_from.id === this.user.id && this.interaction.status_to === StatusInteractionEnum.locked) || 
+      (this.interaction.user_to.id === this.user.id && this.interaction.status_from === StatusInteractionEnum.locked)) return true;
     return false;
   }
   
   public youWereBlocked = () => {
-    if (this.interaction.user_from.id === this.user.id && this.interaction.status_from === StatusInteractionEnum.locked) return true;
-    if (this.interaction.status_to === StatusInteractionEnum.locked) return true;
+    if (
+      (this.interaction.user_from.id === this.user.id && this.interaction.status_from === StatusInteractionEnum.locked) || 
+      (this.interaction.user_to.id === this.user.id && this.interaction.status_to === StatusInteractionEnum.locked)) return true;
     return false;
   }
 
-  public isActive = ():boolean => {
+  public isActive = (): boolean => {
     if (this.interaction.status_from === StatusInteractionEnum.active && this.interaction.status_to === StatusInteractionEnum.active) return true;
     return false;
-  }
-
-  public sendMessage = () => {
-    if (this.chatForm.invalid) return;
-    console.log(this.chatForm.value);
-    this.chatForm.reset(); 
   }
 
   public buttonOptionsInteractionUser = (event:any) => {
@@ -134,6 +130,33 @@ export class UserComponent {
       return this.interaction.status_from === StatusInteractionEnum.locked;
     }
 
+  }
+
+  
+  public sendMessage = () => {
+    if (this.chatForm.invalid) return;
+    
+    const data = {
+      ...this.chatForm.value,
+      userTo: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id
+    }
+    this.chatService.createChat(data)
+      .subscribe({
+        next : (value:any) => {
+          const data = value.data.createChat;
+          const newChat: ChatModule = new ChatModule(
+            data.id,
+            data.message,
+            data.user_from,
+            data.user_to
+          );
+          this.chats = [...this.chats, newChat]
+        },
+        error(err) {
+          console.log(err);
+        },
+      })
+    this.chatForm.reset(); 
   }
 
 }

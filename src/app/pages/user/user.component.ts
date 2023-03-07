@@ -50,14 +50,21 @@ export class UserComponent {
     this.user = this.authService.user;
 
     this.interactionService.getUserInteracion(id)
-      .subscribe({
-        next: (resp:any) => {
-          this.interaction = resp.data.findUserInteraction;
-        },
-        error(err) {
-          console.log(err);
-        },
-      })
+      .valueChanges.subscribe((result: any) => {
+
+        console.log(result);
+        
+
+        const rates = result.data?.rates;
+        const loading = result.loading;
+        const error = result.error;
+
+        console.log(rates);
+        console.log(loading);
+        console.log(error);
+        
+        
+      });
     
     this.chatService.getChat(id)
       .subscribe({

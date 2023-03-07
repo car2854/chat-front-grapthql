@@ -42,7 +42,31 @@ const USER_INTERACTION = gql`
         password
       }
     }
-  }`;
+  }`
+;
+
+const USER_INTERACTION_BY_UID_PROFILE = gql`
+
+  query FindUserInteractionByUidUser($uid_profile: String!){
+    findUserInteractionByUidUser(uid_profile: $uid_profile) {
+      id,
+      status_from,
+      status_to,
+      user_from {
+        id
+        name
+        email
+        password
+      }
+      user_to {
+        id
+        name
+        email
+        password
+      }
+    }
+  }`
+;
 
 const USER_CHAT = gql`
 
@@ -66,4 +90,4 @@ const USER_CHAT = gql`
 
 
 
-export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT }
+export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE }

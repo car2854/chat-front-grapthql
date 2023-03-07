@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApolloQueryResult } from '@apollo/client';
 import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
 import { InteractionModule } from '../models/interaction.module';
@@ -31,11 +32,13 @@ export class PagesComponent {
     this.user = this.authService.user;
 
     this.interactionSerice.getUsersInteractions()
-      .subscribe({
-        next: (resp:any) => {
-          this.interactions = resp.data.getUsersInteractions;
-        },
-        error: (err:any) => console.log(err)
+      .subscribe((result: ApolloQueryResult<any>) => {
+
+        this.interactions = result.data.getUsersInteractions;
+        
+        console.log(result.data.loading);
+        console.log(result.error);
+        
       });
 
   }
@@ -87,12 +90,14 @@ export class PagesComponent {
     const userName = event.srcElement.value || '';
 
     this.interactionSerice.getUsersInteractions(userName)
-    .subscribe({
-      next: (resp:any) => {
-        this.interactions = resp.data.getUsersInteractions;
-      },
-      error: (err:any) => console.log(err)
-    });
+      .subscribe((result: ApolloQueryResult<any>) => {
+
+        this.interactions = result.data.getUsersInteractions;
+        console.log(result.data.loading);
+        console.log(result.error);
+        
+
+      });
 
   }
 
@@ -107,16 +112,16 @@ export class PagesComponent {
       showCancelButton: true,
       confirmButtonText: 'Look up',
       showLoaderOnConfirm: true,
-      preConfirm: (uid:number) => {
-        return this.interactionSerice.getUserInteracion(uid)
-          .subscribe({
-            error(err) {
-              console.log(err);
-            },
-            next: (value) => {
-              console.log(value);
-            },
-          })
+      preConfirm: (uid:string) => {
+        return this.interactionSerice.getUserInteracionByUidUser(uid)
+          .subscribe((result: ApolloQueryResult<any>) => {
+
+            console.log(result.data?.rates);
+            console.log(result.data.loading);
+            console.log(result.error);
+            
+
+          });
       },
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {

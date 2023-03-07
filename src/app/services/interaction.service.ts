@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { USERS_INTERACTION, USER_INTERACTION } from '../graphql/graphql.queries';
+import { USERS_INTERACTION, USER_INTERACTION, USER_INTERACTION_BY_UID_PROFILE } from '../graphql/graphql.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +25,25 @@ export class InteractionService {
           "token": this.token
         }
       }
-    }).valueChanges;
+    }).valueChanges
   }
 
   public getUserInteracion = (id:number) => {
     return this.apollo.watchQuery<any>({
       query: USER_INTERACTION,
+      variables: {id},
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    }).valueChanges
+  }
+
+  public getUserInteracionByUidUser = (id:string) => {
+    return this.apollo.watchQuery<any>({
+      query: USER_INTERACTION_BY_UID_PROFILE,
       variables: {id},
       context: {
         headers: {

@@ -135,17 +135,33 @@ $color-border: #222D34;
 
   
 }
-// .modal-component{
-//   position: absolute;
-//   background-color: rgba(0, 0, 0, 0.5);
-//   width: 100vw;
-//   height: 100vh;
-//   top: 0px;
-//   left: 0px;
 
-//   .form-group{
+.active{
+  background-color: #2A3942;
+}
 
-//   }
-// }
+.modal-component{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .modal-content{
+    border-radius: 3px;
+    width: 500px;
+    padding-inline: 15px;
+    padding-block: 8px;
+    background-color: white;
+  
+  }
+}
 
 
+.hidden{
+  visibility: hidden;
+}

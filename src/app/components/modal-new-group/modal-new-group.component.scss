@@ -1,0 +1,35 @@
+.modal-title{
+  text-align: center;
+}
+
+.modal-body{
+  
+  label{
+    font-weight: bold;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .modal-users-list{
+
+    .modal-users{
+      user-select: none;
+      ul{
+        list-style: none;
+        padding: 0px;
+        cursor: pointer;
+
+        li:hover{
+          background-color: rgb(119, 119, 119);
+          color: white;
+        }
+      }
+    }
+
+  }
+
+}

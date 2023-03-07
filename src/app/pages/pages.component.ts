@@ -1,17 +1,12 @@
-import { Component } from '@angular/core';
-import { ApolloQueryResult } from '@apollo/client';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ApolloQueryResult } from '@apollo/client/core';
 import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
+import UserInteractions from '../interfaces/user-interactions';
 import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
 import { AuthService } from '../services/auth.service';
 import { InteractionService } from '../services/interaction.service';
-
-interface UserInteractions{
-  id_interaction: number,
-  user: UserModule,
-  status: string
-}
 
 @Component({
   selector: 'app-pages',
@@ -20,12 +15,16 @@ interface UserInteractions{
 })
 export class PagesComponent {
   
+  @ViewChild('refModalCreateGroup') refModalCreateGroup!: ElementRef<HTMLDivElement>;
+
   public user!: UserModule;
   public interactions: InteractionModule[] = [];
 
+  public idSelected = 0;
+
   constructor(
     private authService: AuthService,
-    private interactionSerice: InteractionService
+    private interactionSerice: InteractionService,
   ){}
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class PagesComponent {
 
     this.interactionSerice.getUsersInteractions()
       .subscribe((result: ApolloQueryResult<any>) => {
-
+        
         this.interactions = result.data.getUsersInteractions;
         
         console.log(result.data.loading);
@@ -113,13 +112,17 @@ export class PagesComponent {
       confirmButtonText: 'Look up',
       showLoaderOnConfirm: true,
       preConfirm: (uid:string) => {
+
+
         return this.interactionSerice.getUserInteracionByUidUser(uid)
           .subscribe((result: ApolloQueryResult<any>) => {
 
-            console.log(result.data?.rates);
-            console.log(result.data.loading);
-            console.log(result.error);
-            
+            if (result.error){
+              console.log(result.error);
+            }else{
+              this.interactions = [result.data.findUserInteractionByUidUser, ...this.interactions];
+              console.log(result.data.loading);
+            }
 
           });
       },
@@ -129,5 +132,18 @@ export class PagesComponent {
         
       }
     })
+  }
+
+  public createGroup = (event:any) => {
+    event.target.parentElement.classList.add('hidden');
+
+    this.refModalCreateGroup.nativeElement.classList.remove('hidden');
+    
+  }
+
+  public clickCloseModal = (event:any) => {
+    if (event.srcElement.classList.contains('modal-component')){
+      event.srcElement.classList.add('hidden');
+    }
   }
 }

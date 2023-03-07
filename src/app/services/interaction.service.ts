@@ -41,10 +41,11 @@ export class InteractionService {
     }).valueChanges
   }
 
-  public getUserInteracionByUidUser = (id:string) => {
+  public getUserInteracionByUidUser = (uid:string) => {
+
     return this.apollo.watchQuery<any>({
       query: USER_INTERACTION_BY_UID_PROFILE,
-      variables: {id},
+      variables: {uid_profile: uid},
       context: {
         headers: {
           // "Content-Type": "application/json",

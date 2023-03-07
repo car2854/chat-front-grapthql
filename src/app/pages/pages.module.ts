@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { UserComponent } from './user/user.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterLinkActive,
     RouterLink,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }

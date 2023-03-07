@@ -1,6 +1,9 @@
 import { Component, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApolloError } from '@apollo/client/core';
+import { ApolloQueryResult } from '@apollo/client/core/types';
+import { MutationResult } from 'apollo-angular';
 import { StatusInteractionEnum } from 'src/app/enum/status-interaction';
 import { ChatModule } from 'src/app/models/chat.module';
 import { InteractionModule } from 'src/app/models/interaction.module';
@@ -50,19 +53,18 @@ export class UserComponent {
     this.user = this.authService.user;
 
     this.interactionService.getUserInteracion(id)
-      .valueChanges.subscribe((result: any) => {
-
-        console.log(result);
+      .subscribe((result: ApolloQueryResult<any>) => {
         
+        console.log(result.loading);
+        if (result.error){
+          const error = result.error;
+          console.log(error);
+        }
 
-        const rates = result.data?.rates;
-        const loading = result.loading;
-        const error = result.error;
+        if (result.data){
+          this.interaction = result.data.findUserInteraction;
+        }
 
-        console.log(rates);
-        console.log(loading);
-        console.log(error);
-        
         
       });
     
@@ -71,7 +73,7 @@ export class UserComponent {
         next: (value:any) => {
           this.chats = value.data.getChats;
         },
-        error(err) {
+        error(err:ApolloError) {
           console.log(err);
         },
       })
@@ -107,14 +109,20 @@ export class UserComponent {
     const id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
     
     this.statusService.blockUser(id)
-    .subscribe({
-      complete() {
+    .subscribe(
+      (resp: MutationResult) => {
         event.target.parentElement.classList.add('hidden');
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
+      }
+    );
+    
+    // .subscribe({
+    //   complete() {
+    //     event.target.parentElement.classList.add('hidden');
+    //   },
+    //   error: (err:ApolloError) => {
+    //     console.log(err);
+    //   },
+    // })
     
   }
   
@@ -122,11 +130,16 @@ export class UserComponent {
     const id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
 
     this.statusService.clearStatusUser(id)
-      .subscribe({
-        complete() {
-          event.target.parentElement.classList.add('hidden');
-        },
-      });
+    .subscribe(
+      (resp:MutationResult) => {
+        event.target.parentElement.classList.add('hidden');
+      }
+    )
+      // .subscribe({
+      //   complete() {
+      //     event.target.parentElement.classList.add('hidden');
+      //   },
+      // });
   }
 
   public isBloqued = ():boolean => {

@@ -13,7 +13,7 @@
         </button> 
         <ul class="options hidden">
           <li (click)="newUser($event)">Nuevo Usuario</li>
-          <li>Opcion 2</li>
+          <li (click)="createGroup($event)">Crear grupo</li>
           <li>Opcion 3</li>
         </ul>
       </div>
@@ -30,8 +30,8 @@
     <div class="contacts">
       <ul>
         <li *ngFor="let interaction of convertInteractionToUserInteractions(interactions)">
-          <a [routerLink]="[ '/main/', interaction.user.id ]">
-            <div class="contact">
+          <a (click)="idSelected = interaction.user.id" [routerLink]="[ '/main/', interaction.user.id ]">
+            <div class="contact" [ngClass]="{'active': interaction.user.id === idSelected}">
               <div class="photo"></div>
               <h5>{{interaction.user.name}}</h5>
             </div>
@@ -69,16 +69,12 @@
 </div>
 
 
-<!-- <div class="modal-component">
+<div class="modal-component hidden" #refModalCreateGroup (click)="clickCloseModal($event)">
   
-  <div>
-    <h1>Modal 1</h1>
-  </div>
-  <div class="form-group">
-    <label for="">Ingrese el id del perfil</label>
-    <input type="text">
+  <div class="modal-content">
+    <app-modal-new-group [refModal]="refModalCreateGroup" [usersInteractions]="convertInteractionToUserInteractions(interactions)"></app-modal-new-group>
   </div>
 
-</div> -->
+</div>
 
 

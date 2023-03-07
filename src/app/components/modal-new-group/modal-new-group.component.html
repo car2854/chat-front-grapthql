@@ -1,0 +1,27 @@
+<div class="modal-title">
+  <h1>Nuevo grupo</h1>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label for="">Ingrese el nombre del grupo</label>
+    <input type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Ingrese alguna descripcion</label>
+    <textArea class="form-control" style="resize: none;"></textArea>
+  </div>
+  <div class="modal-users-list">
+    <label for="">Seleccione al menos dos usuarios</label>
+    <div class="modal-users">
+      <ul>
+        <li *ngFor="let userInteracion of usersInteracions">
+          {{userInteracion.user.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="buttons">
+    <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary">Crear Grupo</button>
+  </div>
+</div>

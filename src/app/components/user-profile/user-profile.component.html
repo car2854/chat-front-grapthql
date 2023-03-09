@@ -1,0 +1,27 @@
+
+<div class="profile-detail">
+  <div class="image">
+
+  </div>
+  <div class="profile-name">
+    <ng-container *ngIf="isGroup(); else elseGroup">
+      <h1>{{interaction.group_from.title}}</h1>
+      <p>Estado</p>
+    </ng-container>
+    <ng-template #elseGroup>
+      <h1>{{interaction.user_from.id === user.id ? interaction.user_to.name : interaction.user_from.name}}</h1>
+      <p>Estado</p>
+    </ng-template>
+    
+  </div>
+  <div class="options">
+    <button type="button" (click)="buttonOptionsInteractionUser($event)">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <ul class="select-options hidden">
+      <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
+      <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>
+      <li>Opcion 3</li>
+    </ul>
+  </div>
+</div>

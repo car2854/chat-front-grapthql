@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { USERS_INTERACTION, USER_INTERACTION, USER_INTERACTION_BY_UID_PROFILE } from '../graphql/graphql.queries';
+import { FIND_GROUP, USERS_INTERACTION, USER_INTERACTION, USER_INTERACTION_BY_UID_PROFILE } from '../graphql/graphql.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,20 @@ export class InteractionService {
     return this.apollo.watchQuery<any>({
       query: USER_INTERACTION_BY_UID_PROFILE,
       variables: {uid_profile: uid},
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    }).valueChanges
+  }
+
+  public getGroupInteracionByUidUser = (id:string) => {
+
+    return this.apollo.watchQuery<any>({
+      query: FIND_GROUP,
+      variables: {id: id},
       context: {
         headers: {
           // "Content-Type": "application/json",

@@ -19,6 +19,12 @@ const USERS_INTERACTION = gql`
         email,
         create_at
       },
+      group_from{
+        id,
+        title,
+        description,
+        create_at
+      }
     }
   }`;
 
@@ -86,8 +92,30 @@ const USER_CHAT = gql`
   }`
 ;
 
+const FIND_GROUP = gql`
+  query FindGroupInteraction($id: String!){
+    findGroupInteraction(id: $id){
+      id,
+      status_from,
+      status_to,
+      user_to{
+        id,
+        name,
+        email
+      },
+      group_from{
+        id,
+        title,
+        description,
+        create_at,
+        allow_image
+      }
+    }
+  }`
+;
 
 
 
 
-export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE }
+
+export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP }

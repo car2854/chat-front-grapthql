@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
 import UserInteractions from '../interfaces/user-interactions';
@@ -7,6 +9,8 @@ import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
 import { AuthService } from '../services/auth.service';
 import { InteractionService } from '../services/interaction.service';
+
+export let browserRefresh = false;
 
 @Component({
   selector: 'app-pages',
@@ -21,22 +25,32 @@ export class PagesComponent {
   public interactions: InteractionModule[] = [];
 
   public idSelected = 0;
+  public groupSelected = '';
 
   constructor(
     private authService: AuthService,
     private interactionSerice: InteractionService,
-  ){}
+    private route: ActivatedRoute,
+    private router: Router,
+  ){
+
+  }
+  
 
   ngOnInit(): void {
+
+
     this.user = this.authService.user;
 
     this.interactionSerice.getUsersInteractions()
       .subscribe((result: ApolloQueryResult<any>) => {
         
-        this.interactions = result.data.getUsersInteractions;
         
-        console.log(result.data.loading);
-        console.log(result.error);
+        this.interactions = result.data.getUsersInteractions;
+        // console.log(this.interactions);
+        
+        // console.log(result.data.loading);
+        // console.log(result.error);
         
       });
 
@@ -51,11 +65,17 @@ export class PagesComponent {
       let data: UserInteractions = {
         id_interaction: interaction.id,
         status: '',
-        user: interaction.user_from
+        user: interaction.user_to,
+        group: interaction.group_from
       };
 
-      if (interaction.user_from.id === this.user.id){
-        data.user = interaction.user_to;
+      if (interaction.user_to.id === this.user.id){
+
+        if (interaction.user_from){
+          
+          data.user = interaction.user_from;
+
+        }
 
         if (interaction.status_from != StatusInteractionEnum.active){
 
@@ -72,7 +92,7 @@ export class PagesComponent {
       newList.push(data);
 
     });
-
+    
     return newList
 
   }
@@ -85,6 +105,12 @@ export class PagesComponent {
     else refData.classList.add('hidden');
   }
 
+  public logout = (event:any) => {
+    event.target.parentElement.classList.add('hidden');
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
+  }
+
   public changeInput = (event:any) => {
     const userName = event.srcElement.value || '';
 
@@ -92,8 +118,8 @@ export class PagesComponent {
       .subscribe((result: ApolloQueryResult<any>) => {
 
         this.interactions = result.data.getUsersInteractions;
-        console.log(result.data.loading);
-        console.log(result.error);
+        // console.log(result.data.loading);
+        // console.log(result.error);
         
 
       });
@@ -121,7 +147,7 @@ export class PagesComponent {
               console.log(result.error);
             }else{
               this.interactions = [result.data.findUserInteractionByUidUser, ...this.interactions];
-              console.log(result.data.loading);
+              // console.log(result.data.loading);
             }
 
           });

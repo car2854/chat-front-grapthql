@@ -2,6 +2,7 @@ import { Component, ElementRef, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MutationResult } from 'apollo-angular';
 import UserInteractions from 'src/app/interfaces/user-interactions';
+import { GroupModule } from 'src/app/models/group.module';
 import UserModule from 'src/app/models/user.module';
 import { GroupService } from 'src/app/services/group.service';
 
@@ -65,10 +66,11 @@ export class ModalNewGroupComponent {
     }).subscribe((resp: MutationResult<any>) => {
       //console.log(resp.data);
       //console.log(resp.errors);
-      console.log(resp);
+      // console.log(resp);
       
     });
     
 
   }
+
 }

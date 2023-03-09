@@ -16,9 +16,11 @@
       <div class="modal-users">
         <ul>
           <ng-container *ngFor="let userInteracion of usersInteracions">
-            <li (click)="clickUser(userInteracion.user)" [ngClass]="{'active': existUser(userInteracion.user)}">
-              {{userInteracion.user.name}}
-            </li>
+            <ng-container *ngIf="userInteracion.user">
+              <li (click)="clickUser(userInteracion.user)" [ngClass]="{'active': existUser(userInteracion.user)}">
+                {{userInteracion.user.name}}
+              </li>
+            </ng-container>
           </ng-container>
         </ul>
       </div>

@@ -14,7 +14,7 @@
         <ul class="options hidden">
           <li (click)="newUser($event)">Nuevo Usuario</li>
           <li (click)="createGroup($event)">Crear grupo</li>
-          <li>Opcion 3</li>
+          <li (click)="logout($event)">Cerrar sesion</li>
         </ul>
       </div>
 
@@ -30,31 +30,25 @@
     <div class="contacts">
       <ul>
         <li *ngFor="let interaction of convertInteractionToUserInteractions(interactions)">
-          <a (click)="idSelected = interaction.user.id" [routerLink]="[ '/main/', interaction.user.id ]">
-            <div class="contact" [ngClass]="{'active': interaction.user.id === idSelected}">
-              <div class="photo"></div>
-              <h5>{{interaction.user.name}}</h5>
-            </div>
-          </a>
+          <ng-container *ngIf="!interaction.group; else elseUserGroup">
+            <a (click)="idSelected = interaction.user!.id; groupSelected =''" [routerLink]="[ '/main/user', interaction.user!.id ]">
+              <div class="contact" [ngClass]="{'active': interaction.user!.id === idSelected}">
+                <div class="photo"></div>
+                <h5>{{interaction.user!.name}}</h5>
+              </div>
+            </a>
+          </ng-container>
+          <ng-template #elseUserGroup>
+            <a (click)="groupSelected = interaction.group!.id; idSelected = 0" [routerLink]="[ '/main/group/', interaction.group!.id ]">
+              <div class="contact" [ngClass]="{'active': interaction.group!.id === groupSelected}">
+                <div class="photo"></div>
+                <h5>{{interaction.group!.title}}</h5>
+              </div>
+            </a>
+          </ng-template>
+          
         </li>
 
-
-        <!-- <li>
-          <a [routerLink]="[ '/main', 4 ]">
-            <div class="contact">
-              <div class="photo"></div>
-              <h5>Grupo 2</h5>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="[ '/main', 5 ]">
-            <div class="contact">
-              <div class="photo"></div>
-              <h5>Usuario 3</h5>
-            </div>
-          </a>
-        </li> -->
       </ul>
     </div>
 

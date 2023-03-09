@@ -7,12 +7,14 @@ import { UserComponent } from './user/user.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
+import { GroupComponent } from './group/group.component';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
     UserComponent,
+    GroupComponent,
   ],
   imports: [
     CommonModule,

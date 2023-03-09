@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TokenGuard } from '../guard/token.guard';
+import { GroupComponent } from './group/group.component';
 import { PagesComponent } from './pages.component';
 import { UserComponent } from './user/user.component';
 
@@ -12,7 +13,8 @@ const routes: Routes = [
     canActivate: [TokenGuard],
     canLoad: [TokenGuard],
     children: [
-      {path: ':id', component: UserComponent},
+      {path: 'user/:id', component: UserComponent},
+      {path: 'group/:id', component: GroupComponent}
     ]
   }
 ];

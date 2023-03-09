@@ -96,6 +96,8 @@ $color-border: #222D34;
     }
     
     .contacts{
+      overflow-y: scroll;
+      max-height: calc(100vh - 220px);
       ul{
         padding: 0px;
         list-style: none;

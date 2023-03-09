@@ -1,4 +1,5 @@
 import { StatusInteractionEnum } from "../enum/status-interaction";
+import { GroupModule } from "./group.module";
 import UserModule from "./user.module";
 
 export class InteractionModule{
@@ -8,7 +9,8 @@ export class InteractionModule{
     public status_from : StatusInteractionEnum,
     public status_to: StatusInteractionEnum,
     public user_from: UserModule,
-    public user_to: UserModule
+    public user_to: UserModule,
+    public group_from: GroupModule,
   ){}
 
 }

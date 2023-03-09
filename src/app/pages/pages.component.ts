@@ -38,8 +38,7 @@ export class PagesComponent {
   
 
   ngOnInit(): void {
-
-
+    
     this.user = this.authService.user;
 
     this.interactionSerice.getUsersInteractions()
@@ -53,7 +52,18 @@ export class PagesComponent {
         // console.log(result.error);
         
       });
+    
+    this.verifyRouter();
+  }
 
+  private verifyRouter = () => {
+    const id = this.router.url.split('/')[3]
+    if (this.containsOnlyNumbers(id)) this.idSelected = parseInt(id);
+    else this.groupSelected = id;
+  }
+
+  private containsOnlyNumbers(str:string) {
+    return /^[0-9]+$/.test(str);
   }
 
   public convertInteractionToUserInteractions = (interactions: InteractionModule[]) : UserInteractions[] => {

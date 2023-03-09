@@ -19,8 +19,11 @@
       <i class="fa-solid fa-bars"></i>
     </button>
     <ul class="select-options hidden">
-      <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
-      <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>
+      <ng-container *ngIf="!interaction.group_from">
+        <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
+        <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>
+      </ng-container>
+      
       <li>Opcion 3</li>
     </ul>
   </div>

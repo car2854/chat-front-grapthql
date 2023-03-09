@@ -22,14 +22,14 @@
         list-style: none;
         padding: 0px;
         cursor: pointer;
-
-        li:hover{
-          background-color: rgb(119, 119, 119);
-          color: white;
-        }
       }
     }
-
+    
   }
+  
+}
 
+.active{
+  background-color: rgb(119, 119, 119);
+  color: white;
 }

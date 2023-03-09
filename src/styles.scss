@@ -37,6 +37,46 @@ input{
   width: 100%;
 }
 
+
 .hidden{
-  display: none;
+  visibility: hidden;
+}
+
+
+.modal-component{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .modal-content{
+    width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    
+    .modal-title{
+      padding-inline: 15px;
+      padding-block: 8px;
+    }
+    
+    .modal-body{
+      padding-inline: 15px;
+      padding-block: 8px;
+    }
+    
+    .modal-buttons{
+      border-radius: 5px;
+      padding-inline: 15px;
+      padding-block: 8px;
+      background-color: #F5F4F7;
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+    }
+  }
 }

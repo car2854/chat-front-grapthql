@@ -103,5 +103,21 @@ const CREARTE_CHAT = gql`
   }
 `;
 
+const CREARTE_GROUP = gql`
+  mutation CreateChat($title: String!, $users: [UserInput!]!, $description: String){
+    createGroup(newGroupInput: {
+      title: $title,
+      users: $users,
+      description: $description,
+    }){
+      id,
+      title,
+      description,
+      create_at,
+      allow_image
+    }
+  }
+`;
 
-export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT}
+
+export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP}

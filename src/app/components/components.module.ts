@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalNewGroupComponent } from './modal-new-group/modal-new-group.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,8 @@ import { ModalNewGroupComponent } from './modal-new-group/modal-new-group.compon
     ModalNewGroupComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     ModalNewGroupComponent

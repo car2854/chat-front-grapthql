@@ -142,8 +142,11 @@ export class PagesComponent {
   }
 
   public clickCloseModal = (event:any) => {
+    
     if (event.srcElement.classList.contains('modal-component')){
       event.srcElement.classList.add('hidden');
     }
+
   }
+
 }

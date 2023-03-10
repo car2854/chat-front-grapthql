@@ -38,7 +38,7 @@
 
     </div>
 
-    <!-- <form autocomplete="off" [formGroup]="chatForm" (ngSubmit)="sendMessage()"> -->
+    <form autocomplete="off" [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="input-chat">
         
         <!-- <ng-container *ngIf="isBlocked()">
@@ -52,7 +52,7 @@
 
 
         <!-- <ng-container *ngIf="isActive()">  -->
-          <input type="text">
+          <input type="text" formControlName="message">
           <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
           <button type="button"><i class="fa-solid fa-image"></i></button>
         <!-- </ng-container> -->
@@ -61,7 +61,7 @@
         
         
       </div>
-    <!-- </form> -->
+    </form>
     
 
   </div>

@@ -114,8 +114,25 @@ const FIND_GROUP = gql`
   }`
 ;
 
+const USER_CHAT_GROUP = gql`
+  query GetChatsGroup($id:String!){
+    getChatsGroup(id: $id){
+      id,
+      message,
+      user_from{
+        id,
+        name
+      },
+      group_to{
+        id,
+        title
+      }
+    }
+  }
+`;
 
 
 
 
-export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP }
+
+export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP, USER_CHAT_GROUP }

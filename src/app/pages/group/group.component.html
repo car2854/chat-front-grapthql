@@ -5,10 +5,10 @@
   <app-user-profile [interactionInput]="interaction"></app-user-profile>
   <div class="chat">
 
-    <div class="messages">
+    <div class="messages" id="message">
 
 
-      <!-- <ng-container *ngFor="let chat of chats">
+      <ng-container *ngFor="let chat of chats">
 
         
         <ng-container *ngIf="chat.user_from.id === user.id; else elseFrom">
@@ -19,6 +19,7 @@
 
         <ng-template #elseFrom>
           <div class="message to">
+            <small>{{chat.user_from.name}}</small>
             <p>{{chat.message}}</p>
           </div>
         </ng-template>
@@ -26,13 +27,7 @@
 
 
 
-      </ng-container> -->
-
-      <!-- 
-        <div class="message from">
-          <p>Me alegro mucho la verdad :)</p>
-        </div> 
-      -->
+      </ng-container>
 
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { CREARTE_CHAT, CREARTE_CHAT_GROUP } from '../graphql/graphql.mutation';
-import { USER_CHAT } from '../graphql/graphql.queries';
+import { USER_CHAT, USER_CHAT_GROUP } from '../graphql/graphql.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,21 @@ export class ChatService {
 
     return this.apollo.watchQuery({
       query: USER_CHAT,
+      variables: {id},
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    }).valueChanges;
+
+  }
+ 
+  public getChatGroup = (id:string) => {
+
+    return this.apollo.watchQuery({
+      query: USER_CHAT_GROUP,
       variables: {id},
       context: {
         headers: {

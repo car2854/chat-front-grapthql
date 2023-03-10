@@ -114,7 +114,7 @@ export class UserComponent {
             data.user_from,
             data.user_to
           );
-          this.chats = [...this.chats, newChat]
+          this.chats = [newChat, ...this.chats]
         },
         error(err) {
           console.log(err);

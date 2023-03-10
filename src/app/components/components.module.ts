@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalNewGroupComponent } from './modal-new-group/modal-new-group.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   exports: [
     ModalNewGroupComponent,

@@ -1,5 +1,5 @@
-
 <div class="profile-detail">
+
   <div class="image">
 
   </div>
@@ -19,10 +19,14 @@
       <i class="fa-solid fa-bars"></i>
     </button>
     <ul class="select-options hidden">
-      <ng-container *ngIf="!interaction.group_from">
+      <ng-container *ngIf="interaction.group_from; else elseGroupUser">
+        <li (click)="disguise($event)" [routerLink]="['/main/participants', interaction.group_from.id]">Ver participantes</li>
+      </ng-container>
+      <ng-template #elseGroupUser>
         <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
         <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>
-      </ng-container>
+      </ng-template>
+      
       
       <li>Opcion 3</li>
     </ul>

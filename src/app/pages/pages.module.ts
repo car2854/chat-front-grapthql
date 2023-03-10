@@ -8,6 +8,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { GroupComponent } from './group/group.component';
+import { ParticipantsComponent } from './participants/participants.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { GroupComponent } from './group/group.component';
     PagesComponent,
     UserComponent,
     GroupComponent,
+    ParticipantsComponent,
   ],
   imports: [
     CommonModule,

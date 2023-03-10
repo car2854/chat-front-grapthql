@@ -131,8 +131,23 @@ const USER_CHAT_GROUP = gql`
   }
 `;
 
+const All_USER_WITHIN_GROUP = gql`
+  query GetAllUsersWithinGroup($id:String!){
+    getAllUsersWithinGroup(id: $id){
+      id,
+      user_to{
+        id,
+        name,
+        email
+      },
+      status_from,
+      status_to
+    }
+  }
+`;
 
 
 
 
-export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP, USER_CHAT_GROUP }
+
+export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP, USER_CHAT_GROUP, All_USER_WITHIN_GROUP }

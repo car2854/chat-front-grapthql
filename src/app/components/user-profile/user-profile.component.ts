@@ -100,4 +100,8 @@ export class UserProfileComponent {
   public isGroup = () => {
     return (this.interaction.group_from);
   }
+
+  public disguise = (event:any) => {
+    event.target.parentElement.classList.add('hidden');
+  }
 }

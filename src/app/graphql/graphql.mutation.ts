@@ -140,5 +140,48 @@ const CREARTE_CHAT_GROUP = gql`
   }
 `;
 
+const NEW_MODETAROR = gql`
+  mutation NewModerator($id: Int!){
+    
+    newModerator(id: $id){
+      id,
+      role,
+      user_to{
+        id,
+        name,
+        email
+      },
+      group_from{
+        id,
+        title,
+        description
+      }
+    }
+    
+  }
 
-export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP}
+`;
+
+const CLEAR_ROLE = gql`
+  mutation ClearRole($id: Int!){
+    
+    clearRole(id: $id){
+      id,
+      role,
+      user_to{
+        id,
+        name,
+        email
+      },
+      group_from{
+        id,
+        title,
+        description
+      }
+    }
+    
+  }
+`;
+
+
+export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE}

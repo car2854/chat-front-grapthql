@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { CREARTE_GROUP } from '../graphql/graphql.mutation';
+import { CLEAR_ROLE, CREARTE_GROUP, NEW_MODETAROR } from '../graphql/graphql.mutation';
 import { All_USER_WITHIN_GROUP } from '../graphql/graphql.queries';
 
 @Injectable({
@@ -43,4 +43,33 @@ export class GroupService {
     });
   }
 
+  public newModerator = (id:number) => {
+    return this.apollo.mutate({
+      mutation: NEW_MODETAROR,
+      variables: {
+        id
+      },
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    });
+  }
+
+  public clearRole = (id:number) => {
+    return this.apollo.mutate({
+      mutation: CLEAR_ROLE,
+      variables: {
+        id
+      },
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    });
+  }
 }

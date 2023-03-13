@@ -15,28 +15,43 @@
   
             </div>
             <div class="detail-user">
-              <p>{{interaction.user_to.name}}</p>
+              <p>{{interaction.user_to.name}} <small class="text-success" *ngIf="isHostOrModeratorInteraction(interaction)"> ( {{interaction.role}} ) </small></p>
               <small>estado</small>
             </div>
 
           </div>
 
-          <ng-container *ngIf="isHost() && user.id != interaction.user_to.id">
+          <ng-container *ngIf="user.id != interaction.user_to.id && !isNone() && !isHostInteraction(interaction) && !moderatorAndModerator(interaction)">
             <div class="dropdown">
               <button class="btn btn-danger tooltipp">
                 <span class="tooltiptext">Sacar del grupo</span>
                 <i class="fa-solid fa-user-xmark"></i>
               </button>
-              <button class="btn btn-success tooltipp" *ngIf="isModeratorInteraction(interaction)">
-                <span class="tooltiptext">Hacer moderador</span>              
-                <i class="fa-solid fa-user-shield"></i>
-              </button>
-              <button class="btn btn-danger tooltipp" *ngIf="!isModeratorInteraction(interaction)">
-                <span class="tooltiptext">Quitar moderador</span>
-                <i class="fa-solid fa-user-shield"></i>
-              </button>
+
+              <ng-container *ngIf="isHost()">
+
+                <button class="btn btn-success tooltipp" (click)="newModerator(interaction)" *ngIf="!isModeratorInteraction(interaction)">
+                  <span class="tooltiptext">Hacer moderador</span>              
+                  <i class="fa-solid fa-user-shield"></i>
+                </button>
+                <button class="btn btn-danger tooltipp" (click)="clearRole(interaction)" *ngIf="isModeratorInteraction(interaction)">
+                  <span class="tooltiptext">Quitar moderador</span>
+                  <i class="fa-solid fa-user-shield"></i>
+                </button>
+
+              </ng-container>
+              
+
             </div>
           </ng-container>
+
+          <ng-container *ngIf="isYourself(interaction)">
+            <div class="yourselft">
+              <p class="text-primary">
+                Eres tu</p>
+            </div>
+          </ng-container>
+          
           
         </div>
       </li>

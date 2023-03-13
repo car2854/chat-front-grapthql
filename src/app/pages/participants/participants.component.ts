@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
+import { MutationResult } from 'apollo-angular';
 import { RoleUserInteraction } from 'src/app/enum/role-user-interaction';
 import { InteractionModule } from 'src/app/models/interaction.module';
 import UserModule from 'src/app/models/user.module';
@@ -56,6 +57,13 @@ export class ParticipantsComponent {
       
   }
 
+  public isNone = () => {
+    if (this.userInteraction){
+      return this.userInteraction.role === RoleUserInteraction.none;
+    }
+    return false;
+  }
+
   public isHost = ():boolean => {
     if (this.userInteraction){
       return this.userInteraction.role === RoleUserInteraction.host;
@@ -63,7 +71,67 @@ export class ParticipantsComponent {
     return false;
   }
 
+  public isYourself = (interaction: InteractionModule) => {
+    return interaction.user_to.id === this.user.id;
+  }
+
+  public isHostOrModeratorInteraction = (interaction: InteractionModule) => {
+    return interaction.role === RoleUserInteraction.host || interaction.role === RoleUserInteraction.moderator
+  }
+
+  public moderatorAndModerator = (interaction: InteractionModule) => {
+    if (interaction.role === RoleUserInteraction.host) return false;
+    if (this.userInteraction?.role === RoleUserInteraction.host) return false;
+    return (interaction.role === RoleUserInteraction.moderator && this.userInteraction?.role === RoleUserInteraction.moderator)
+  }
+
+  public isHostInteraction = (interaction: InteractionModule) => {
+    return interaction.role === RoleUserInteraction.host;
+  }
+
   public isModeratorInteraction = (interaction: InteractionModule) => {
     return interaction.role === RoleUserInteraction.moderator;
+  }
+
+  public newModerator = (interaction: InteractionModule) => {
+
+    return this.groupService.newModerator(interaction.id)
+      .subscribe((resp:MutationResult<any>) => {
+        if (resp.data) {
+          this.interactions = this.interactions.map((interactionData: InteractionModule) => {
+            if (interactionData.id != interaction.id) return interactionData;
+            return new InteractionModule(
+              interactionData.id, 
+              interactionData.status_from, 
+              interactionData.status_to, 
+              interactionData.user_from, 
+              interactionData.user_to,
+              interactionData.group_from, 
+              RoleUserInteraction.moderator
+            )
+          });
+        }
+      });
+
+  }
+
+  public clearRole = (interaction: InteractionModule) => {
+    return this.groupService.clearRole(interaction.id)
+      .subscribe((resp:MutationResult<any>) => {
+        if (resp.data) {
+          this.interactions = this.interactions.map((interactionData: InteractionModule) => {
+            if (interactionData.id != interaction.id) return interactionData;
+            return new InteractionModule(
+              interactionData.id, 
+              interactionData.status_from, 
+              interactionData.status_to, 
+              interactionData.user_from, 
+              interactionData.user_to,
+              interactionData.group_from, 
+              RoleUserInteraction.none
+            )
+          });
+        }
+      });
   }
 }

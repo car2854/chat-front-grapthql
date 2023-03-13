@@ -43,6 +43,14 @@ ul{
         }
       }
 
+      .yourselft{
+        display: flex;
+        align-items: center;
+        p{
+          font-size: 15px;
+        }
+      }
+
       .dropdown{
         display: flex;
         gap: 12px;

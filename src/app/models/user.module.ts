@@ -1,3 +1,5 @@
+import { RoleUserInteraction } from "../enum/role-user-interaction";
+
 export default class UserModule{
   constructor(
     public id: number,

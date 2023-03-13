@@ -135,6 +135,7 @@ const All_USER_WITHIN_GROUP = gql`
   query GetAllUsersWithinGroup($id:String!){
     getAllUsersWithinGroup(id: $id){
       id,
+      role,
       user_to{
         id,
         name,

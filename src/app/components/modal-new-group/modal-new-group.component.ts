@@ -51,6 +51,7 @@ export class ModalNewGroupComponent {
       return true;
     }).map((_) => _);
     else this.userList.push({id: data.id, name: data.name});
+
   }
 
   public createGroup = () => {
@@ -67,7 +68,6 @@ export class ModalNewGroupComponent {
       //console.log(resp.data);
       //console.log(resp.errors);
       // console.log(resp);
-      
     });
     
 

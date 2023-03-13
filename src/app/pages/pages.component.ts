@@ -145,7 +145,8 @@ export class PagesComponent {
         autocapitalize: 'off'
       },
       showCancelButton: true,
-      confirmButtonText: 'Look up',
+      confirmButtonText: 'Agregar',
+      cancelButtonAriaLabel: 'Cancelar',
       showLoaderOnConfirm: true,
       preConfirm: (uid:string) => {
 
@@ -171,6 +172,7 @@ export class PagesComponent {
   }
 
   public createGroup = (event:any) => {
+    
     event.target.parentElement.classList.add('hidden');
 
     this.refModalCreateGroup.nativeElement.classList.remove('hidden');

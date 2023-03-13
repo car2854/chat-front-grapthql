@@ -1,0 +1,60 @@
+ul{
+
+  margin-block: 12px;
+
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li{
+
+    .profile{
+
+      display: flex;
+      justify-content: space-between;
+      margin-inline-end: 12px;
+
+      .detail-profile{
+
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .image{
+          width: 60px;
+          height: 60px;
+          border: 1px solid black;
+          border-radius: 50%;
+          background-color: white;
+        }
+  
+        .detail-user{
+          p{
+            margin: 0px;
+            padding: 0px;
+          }
+          small{
+            color: #ffffffC0;
+            font-size: 12px;
+            margin: 0px;
+            padding: 0px;
+          }
+        }
+      }
+
+      .dropdown{
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+
+
+    }
+
+  }
+
+}
+
+

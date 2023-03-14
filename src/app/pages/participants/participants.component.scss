@@ -8,6 +8,27 @@ ul{
   gap: 12px;
 
   li{
+    
+
+    .new-user{
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      .icon-new-user{
+        width: 60px;
+        height: 60px;
+        border: 1px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      p{
+        padding-top: 12px;
+      }
+    }
 
     .profile{
 

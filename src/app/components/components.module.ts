@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 @NgModule({
   declarations: [
     ModalNewGroupComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { RouterLink } from '@angular/router';
   ],
   exports: [
     ModalNewGroupComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ]
 })
 export class ComponentsModule { }

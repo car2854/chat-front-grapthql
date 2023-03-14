@@ -6,6 +6,21 @@
   <app-user-profile [interactionInput]="interaction"></app-user-profile>
 
   <ul>
+
+    <li (click)="addNewUser()">
+      <div class="new-user">
+        
+        <div class="icon-new-user">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        
+        <p>
+          Agregar un nuevo usuario
+        </p>
+
+      </div>
+    </li>
+    
     <ng-container *ngFor="let interaction of interactions">
       <li>
         <div class="profile">
@@ -61,4 +76,3 @@
 
 
 </ng-template>
-

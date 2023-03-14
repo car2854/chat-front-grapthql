@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
 import { MutationResult } from 'apollo-angular';
@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { GroupService } from 'src/app/services/group.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-participants',
@@ -17,7 +18,6 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export class ParticipantsComponent {
 
-  
   public interaction!: InteractionModule;
   public user!: UserModule;
   public userInteraction?: InteractionModule;
@@ -28,7 +28,8 @@ export class ParticipantsComponent {
     private chatService: ChatService,
     private authService: AuthService,
     private groupService: GroupService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private interactionSerice: InteractionService
   ){
 
     this.route.paramMap.subscribe(params => {
@@ -134,4 +135,39 @@ export class ParticipantsComponent {
         }
       });
   }
+
+  public addNewUser = () => {
+    Swal.fire({
+      title: 'Ingrese el id del usuario',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Agregar',
+      cancelButtonAriaLabel: 'Cancelar',
+      showLoaderOnConfirm: true,
+      preConfirm: (uid:string) => {
+
+
+        return this.interactionSerice.getUserInteracionByUidUser(uid)
+          .subscribe((result: ApolloQueryResult<any>) => {
+
+            if (result.error){
+              console.log(result.error);
+            }else{
+              this.interactions = [result.data.findUserInteractionByUidUser, ...this.interactions];
+              // console.log(result.data.loading);
+            }
+
+          });
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      }
+    });
+  }
+
 }

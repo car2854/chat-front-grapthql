@@ -182,6 +182,42 @@ const CLEAR_ROLE = gql`
     
   }
 `;
+const ADD_NEW_USER_GROUP = gql`
+  mutation AddNewUserGroup($idGroup: String!, $uidUser: String!){
+    addNewUserGroup(idGroup: $idGroup, uidUser: $uidUser){
+      id,
+      status_from,
+      status_to,
+      role,
+      user_to{
+        id,
+        name
+      },
+      group_from{
+        id,
+        title,
+        description
+      }
+    }
+}
+`;
+
+const REMOVE_FROM_GROUP = gql`
+  mutation RemoveFromGroup($idGroup: String!, $idUser: Int!){
+    removeFromGroup(idGroup:$idGroup, idUser:$idUser){
+      id,
+      user_to{
+        id,
+        name
+      },
+      group_from{
+        id,
+        title
+      }
+    }
+  }
+`;
 
 
-export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE}
+
+export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}

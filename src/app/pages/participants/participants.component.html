@@ -38,7 +38,7 @@
 
           <ng-container *ngIf="user.id != interaction.user_to.id && !isNone() && !isHostInteraction(interaction) && !moderatorAndModerator(interaction)">
             <div class="dropdown">
-              <button class="btn btn-danger tooltipp">
+              <button class="btn btn-danger tooltipp" (click)="removeFromGroup(interaction)">
                 <span class="tooltiptext">Sacar del grupo</span>
                 <i class="fa-solid fa-user-xmark"></i>
               </button>

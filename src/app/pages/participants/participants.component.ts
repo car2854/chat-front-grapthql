@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
-import { MutationResult } from 'apollo-angular';
+import { Mutation, MutationResult } from 'apollo-angular';
 import { RoleUserInteraction } from 'src/app/enum/role-user-interaction';
 import { InteractionModule } from 'src/app/models/interaction.module';
 import UserModule from 'src/app/models/user.module';
@@ -137,6 +137,9 @@ export class ParticipantsComponent {
   }
 
   public addNewUser = () => {
+
+    
+
     Swal.fire({
       title: 'Ingrese el id del usuario',
       input: 'text',
@@ -149,17 +152,13 @@ export class ParticipantsComponent {
       showLoaderOnConfirm: true,
       preConfirm: (uid:string) => {
 
-
-        return this.interactionSerice.getUserInteracionByUidUser(uid)
-          .subscribe((result: ApolloQueryResult<any>) => {
-
-            if (result.error){
-              console.log(result.error);
+        return this.groupService.addNewUserGroup({idGroup: this.interaction.group_from.id, uidUser: uid})
+          .subscribe((result:MutationResult<any>) => {
+            if (result.errors){
+              console.log(result.errors);
             }else{
-              this.interactions = [result.data.findUserInteractionByUidUser, ...this.interactions];
-              // console.log(result.data.loading);
+              this.interactions = [...this.interactions, result.data.addNewUserGroup];
             }
-
           });
       },
       allowOutsideClick: () => !Swal.isLoading()
@@ -169,5 +168,26 @@ export class ParticipantsComponent {
       }
     });
   }
+
+  public removeFromGroup = (interactionData: InteractionModule) => {
+    console.log(interactionData.user_to.id);
+    console.log(this.interaction.group_from.id);
+    this.groupService.removeFromGroup({
+      idGroup: this.interaction.group_from.id,
+      idUser: interactionData.user_to.id
+    }).subscribe((result: MutationResult<any>) => {
+      if(result.errors){
+        console.log(result.errors);
+      }else{
+        console.log(result.data.removeFromGroup);
+        this.interactions = this.interactions.filter((interaction: InteractionModule) => {
+          if (interaction.id === interactionData.id) return false;
+          return true;
+        }).map((_) => _);
+      }
+    })
+    
+  }
+
 
 }

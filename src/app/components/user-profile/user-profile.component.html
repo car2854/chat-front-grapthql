@@ -19,9 +19,12 @@
       <i class="fa-solid fa-bars"></i>
     </button>
     <ul class="select-options hidden">
+      
       <ng-container *ngIf="interaction.group_from; else elseGroupUser">
         <li (click)="disguise($event)" [routerLink]="['/main/participants', interaction.group_from.id]">Ver participantes</li>
+        <li (click)="disguise($event)" [routerLink]="['/main/group/detail', interaction.group_from.id]">Descripcion del grupo</li>
       </ng-container>
+
       <ng-template #elseGroupUser>
         <li (click)="blockUser($event)" [hidden]="isBloqued()">Bloquear</li>
         <li (click)="unBlockUser($event)" [hidden]="!isBloqued()">Desbloquear</li>

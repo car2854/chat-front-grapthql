@@ -1,0 +1,34 @@
+<ng-container *ngIf="!interaction; else elseLoading">
+  <h1>Loading</h1>
+</ng-container>
+<ng-template #elseLoading>
+  <app-user-profile [interactionInput]="interaction"></app-user-profile>
+
+  <form autocomplete="off">
+    <div class="form-group">
+      <label for="">Imagen</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">Nombre del grupo</label>
+      <input type="text" class="form-control" [value]="interaction.group_from.title">
+    </div>
+    <div class="form-group">
+      <label for="">Descripcion</label>
+      <input type="text" class="form-control" [value]="interaction.group_from.description">
+    </div>
+    <div class="form-group">
+      <label for="">Creado en</label>
+      <input type="text" class="form-control" [value]="interaction.group_from.create_at">
+    </div>
+    <div class="form-group">
+      <label for="">Solo los mods y el host pueden enviar mensaje</label>
+      <input type="text" class="form-control" [value]="interaction.group_from.only_mod_host">
+    </div>
+    <div class="form-group">
+      <label for="">Permitir imagenes</label>
+      <input type="text" class="form-control" [value]="interaction.group_from.allow_image">
+    </div>
+  </form>
+
+</ng-template>

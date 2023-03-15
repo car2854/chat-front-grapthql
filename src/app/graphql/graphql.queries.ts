@@ -108,7 +108,8 @@ const FIND_GROUP = gql`
         title,
         description,
         create_at,
-        allow_image
+        allow_image,
+        only_mod_host
       }
     }
   }`

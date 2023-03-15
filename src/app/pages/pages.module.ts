@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { GroupComponent } from './group/group.component';
 import { ParticipantsComponent } from './participants/participants.component';
+import { DetailGroupComponent } from './detail-group/detail-group.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ParticipantsComponent } from './participants/participants.component';
     UserComponent,
     GroupComponent,
     ParticipantsComponent,
+    DetailGroupComponent,
   ],
   imports: [
     CommonModule,

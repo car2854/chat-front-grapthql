@@ -9,7 +9,7 @@ const LOGIN = gql`
       id,
       name,
       email,
-      create_at,
+      created_at,
       token,
       uid_profile
     }
@@ -27,7 +27,7 @@ const REGISTER = gql`
       name,
       email,
       password,
-      create_at,
+      created_at,
       token,
       uid_profile
     }
@@ -40,7 +40,7 @@ const RENEWTOKEN = gql`
       id,
       name,
       email,
-      create_at,
+      created_at,
       token,
       uid_profile
     }
@@ -113,7 +113,7 @@ const CREARTE_GROUP = gql`
       id,
       title,
       description,
-      create_at,
+      created_at,
       allow_image
     }
   }
@@ -127,7 +127,7 @@ const CREARTE_CHAT_GROUP = gql`
     }){
       id,
       message,
-      create_at,
+      created_at,
       user_from{
         id,
         name
@@ -230,7 +230,7 @@ mutation UpdateGroup($idGroup: String!, $title: String, $description: String, $a
     id,
     title,
     description,
-    create_at,
+    created_at,
     allow_image,
     only_mod_host
   }

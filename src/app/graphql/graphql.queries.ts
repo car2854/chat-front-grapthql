@@ -11,19 +11,19 @@ const USERS_INTERACTION = gql`
         id,
         name,
         email,
-        create_at
+        created_at
       },
       user_to{
         id,
         name,
         email,
-        create_at
+        created_at
       },
       group_from{
         id,
         title,
         description,
-        create_at
+        created_at
       }
     }
   }`;
@@ -107,7 +107,7 @@ const FIND_GROUP = gql`
         id,
         title,
         description,
-        create_at,
+        created_at,
         allow_image,
         only_mod_host
       }

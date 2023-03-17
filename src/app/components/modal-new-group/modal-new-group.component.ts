@@ -39,13 +39,13 @@ export class ModalNewGroupComponent {
   }
 
   public existUser = (user:UserModule) => {
-    const {create_at, email, uid_profile, ...data} = user;
+    const {created_at, email, uid_profile, ...data} = user;
     return this.userList.some((user:any) => user.id === data.id);
   }
 
   public clickUser = (user:UserModule) => {
 
-    const {create_at, email, uid_profile, ...data} = user;
+    const {created_at, email, uid_profile, ...data} = user;
     if (this.userList.some((user:any) => user.id === data.id)) this.userList = this.userList.filter((user:any) => {
       if (user.id === data.id) return false;
       return true;

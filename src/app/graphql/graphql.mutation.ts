@@ -218,6 +218,25 @@ const REMOVE_FROM_GROUP = gql`
   }
 `;
 
+const UPDATE_GROUP = gql`
+mutation UpdateGroup($idGroup: String!, $title: String, $description: String, $allow_image: Boolean, $only_mod_host: Boolean){
+  updateGroup(updateGroupInput:{
+    idGroup: $idGroup,
+    title: $title,
+    description: $description,
+    allow_image: $allow_image,
+    only_mod_host: $only_mod_host
+  }){
+    id,
+    title,
+    description,
+    create_at,
+    allow_image,
+    only_mod_host
+  }
+}
+`;
 
 
-export {LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}
+
+export {UPDATE_GROUP, LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}

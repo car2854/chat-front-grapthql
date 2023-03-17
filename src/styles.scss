@@ -113,3 +113,7 @@ input{
 .tooltipp:hover .tooltiptext {
   visibility: visible;
 }
+
+textarea:focus, input:focus{
+  outline: none;
+}

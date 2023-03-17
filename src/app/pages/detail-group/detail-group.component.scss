@@ -1,0 +1,27 @@
+.content-detail-profile{
+  margin-block: 12px;
+  margin-inline: 32px;
+}
+
+.form-control{
+  display: flex;
+  gap: 8px;
+  background-color: #00000000;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff8f;
+  border: none;
+  i{
+    cursor: pointer;
+  }
+
+  input{
+    font-size: 14px;
+    color: #ffffff8f;
+    padding-block: 4px;
+  }
+}
+
+.select{
+  border-bottom: 1px solid white;
+}

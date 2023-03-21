@@ -2,7 +2,7 @@ import { gql } from 'apollo-angular';
 
 const USERS_INTERACTION = gql`
 
-  query GetUsersInteractions($userName: String){
+query GetUsersInteractions($userName: String){
     getUsersInteractions(userName: $userName) {
       id,
       status_from,
@@ -11,26 +11,45 @@ const USERS_INTERACTION = gql`
         id,
         name,
         email,
-        created_at
+        created_at,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       },
       user_to{
         id,
         name,
         email,
-        created_at
+        created_at,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       },
       group_from{
         id,
         title,
         description,
-        created_at
+        created_at,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       }
     }
-  }`;
+  }
+`;
 
 const USER_INTERACTION = gql`
 
-  query FindUserInteraction($id: Int!){
+query FindUserInteraction($id: Int!){
     findUserInteraction(id: $id) {
       id,
       status_from,
@@ -39,17 +58,29 @@ const USER_INTERACTION = gql`
         id
         name
         email
-        password
+        password,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       }
       user_to {
         id
         name
         email
-        password
+        password,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       }
     }
-  }`
-;
+  }
+`;
 
 const USER_INTERACTION_BY_UID_PROFILE = gql`
 

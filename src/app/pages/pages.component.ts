@@ -187,4 +187,14 @@ export class PagesComponent {
 
   }
 
+  public noImage = (name:string) => {
+
+    if (name.includes(' ')){
+      return name.charAt(0).toUpperCase() + name.charAt(name.indexOf(' ') + 1).toUpperCase()
+    }else{
+      return name.charAt(0).toUpperCase() + name.charAt(1).toUpperCase();
+    }
+    
+  }
+
 }

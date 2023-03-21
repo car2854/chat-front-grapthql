@@ -11,7 +11,13 @@ const LOGIN = gql`
       email,
       created_at,
       token,
-      uid_profile
+      uid_profile,
+      image{
+        id,
+        name,
+        dir,
+        created_at
+      }
     }
   }
 `;
@@ -29,7 +35,13 @@ const REGISTER = gql`
       password,
       created_at,
       token,
-      uid_profile
+      uid_profile,
+      image{
+        id,
+        name,
+        dir,
+        created_at
+      }
     }
   }
 `;
@@ -42,7 +54,13 @@ const RENEWTOKEN = gql`
       email,
       created_at,
       token,
-      uid_profile
+      uid_profile,
+      image{
+        id,
+        name,
+        dir,
+        created_at
+      }
     }
   }
 `;

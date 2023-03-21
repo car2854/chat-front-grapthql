@@ -32,6 +32,10 @@ $color-border: #222D34;
           width: 60px;
           height: 60px;
           border-radius: 50%;
+          overflow: hidden;
+          img{
+            width: 100%;
+          }
         }
       }
       .options-user{
@@ -119,6 +123,11 @@ $color-border: #222D34;
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
+                overflow: hidden;
+                img{
+                  width: 100%;
+                }
+
               }
             }
           }

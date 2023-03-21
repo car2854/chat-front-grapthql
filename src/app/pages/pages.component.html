@@ -3,7 +3,17 @@
     
     <div class="user-name">
       <div class="info">
-        <div class="photo"></div>
+        <div class="photo">
+          <ng-container *ngIf="user.image; else elseNoImageUserAuth">
+            <img src="{{user.image.dir}}" alt="">
+          </ng-container>
+          <ng-template #elseNoImageUserAuth>
+            <div class="no-image">
+              <h5>{{noImage(user.name)}}</h5>
+            </div>
+          </ng-template>
+          
+        </div>
         <h3>{{user.name}}</h3>
       </div>
 
@@ -33,7 +43,17 @@
           <ng-container *ngIf="!interaction.group; else elseUserGroup">
             <a (click)="idSelected = interaction.user!.id; groupSelected =''" [routerLink]="[ '/main/user', interaction.user!.id ]">
               <div class="contact" [ngClass]="{'active': interaction.user!.id === idSelected}">
-                <div class="photo"></div>
+                <div class="photo">
+                  <ng-container *ngIf="interaction.user!.image; else elseNoImageUser">
+                    <img [src]="interaction.user!.image.dir" alt="">
+                  </ng-container>
+                  <ng-template #elseNoImageUser>
+                    <div class="no-image">
+                      <h5>{{noImage(interaction.user!.name)}}</h5>
+                    </div>
+                  </ng-template>
+                  
+                </div>
                 <h5>{{interaction.user!.name}}</h5>
               </div>
             </a>
@@ -41,7 +61,17 @@
           <ng-template #elseUserGroup>
             <a (click)="groupSelected = interaction.group!.id; idSelected = 0" [routerLink]="[ '/main/group/', interaction.group!.id ]">
               <div class="contact" [ngClass]="{'active': interaction.group!.id === groupSelected}">
-                <div class="photo"></div>
+                <div class="photo">
+                  <ng-container *ngIf="interaction.group!.image; else elseNoImageGroup">
+                    
+                  </ng-container>
+                  <ng-template #elseNoImageGroup>
+                    <div class="no-image">
+                      <h5>{{noImage(interaction.group!.title)}}</h5>
+                    </div>
+                  </ng-template>
+                  
+                </div>
                 <h5>{{interaction.group!.title}}</h5>
               </div>
             </a>

@@ -1,4 +1,5 @@
 import { RoleUserInteraction } from "../enum/role-user-interaction";
+import { ImageModule } from "./image.module";
 
 export default class UserModule{
   constructor(
@@ -7,5 +8,6 @@ export default class UserModule{
     public email: string,
     public created_at: Date,
     public uid_profile: string,
+    public image: ImageModule
   ){}
 }

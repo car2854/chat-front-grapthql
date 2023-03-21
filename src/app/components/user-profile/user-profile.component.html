@@ -1,7 +1,39 @@
 <div class="profile-detail">
 
   <div class="image">
+    <ng-container *ngIf="isGroup(); else elseGroupImage">
 
+      <ng-container *ngIf="interaction.group_from.image; else elseGroupImage">
+        <img [src]="interaction.group_from.image.dir" alt="">
+      </ng-container>
+      <ng-template #elseGroupImage>
+        <div class="no-image">
+          <h1>{{noImage(interaction.group_from.title)}}</h1>
+        </div>
+      </ng-template>
+      
+
+    </ng-container>
+    <ng-template #elseGroupImage>
+
+      <ng-container *ngIf="existUserImage(); else elseImageUser">
+        
+        <img [src]="getImageUser()" alt="">
+
+      </ng-container>
+      <ng-template #elseImageUser>
+        
+        <div class="no-image">
+          <h1>{{noImageUser()}}</h1>
+        </div>
+
+      </ng-template>
+      
+      
+      
+      
+    </ng-template>
+    
   </div>
   <div class="profile-name">
     <ng-container *ngIf="isGroup(); else elseGroup">

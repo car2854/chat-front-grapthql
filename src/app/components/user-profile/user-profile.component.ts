@@ -104,4 +104,34 @@ export class UserProfileComponent {
   public disguise = (event:any) => {
     event.target.parentElement.classList.add('hidden');
   }
+
+  public noImage = (name:string) => {
+
+    if (name.includes(' ')){
+      return name.charAt(0).toUpperCase() + name.charAt(name.indexOf(' ') + 1).toUpperCase()
+    }else{
+      return name.charAt(0).toUpperCase() + name.charAt(1).toUpperCase();
+    }
+    
+  }
+
+  public existUserImage = () => {
+
+    if (this.interaction.user_from.id === this.user.id) return (this.interaction.user_to.image != undefined)
+    else return (this.interaction.user_from.image != undefined);
+
+  }
+
+
+  public noImageUser = () => {
+
+    if (this.interaction.user_from.id === this.user.id) return this.noImage(this.interaction.user_to.name)
+    else return this.noImage(this.interaction.user_from.name)
+    
+  }
+
+  public getImageUser = () => {
+    if (this.interaction.user_from.id === this.user.id) return this.interaction.user_to.image.dir
+    else return this.interaction.user_from.image.dir
+  }
 }

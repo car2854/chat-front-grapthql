@@ -12,9 +12,13 @@ $color1: #222E35;
   .image{
     width: 150px;
     height: 150px;
-    border: 1px solid black;
     border-radius: 50%;
     background-color: white;
+    overflow: hidden;
+    border: none;
+    img{
+      width: 100%;
+    }
   }
   .options{
     button{

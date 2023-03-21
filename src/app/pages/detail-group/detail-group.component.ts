@@ -7,6 +7,7 @@ import { GroupModule } from 'src/app/models/group.module';
 import { InteractionModule } from 'src/app/models/interaction.module';
 import { GroupService } from 'src/app/services/group.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-detail-group',
@@ -21,7 +22,8 @@ export class DetailGroupComponent {
     private fb: FormBuilder,
     private interactionService: InteractionService,
     private groupService: GroupService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uploadService: UploadService
   ){}
     
   ngOnInit(): void {
@@ -122,6 +124,33 @@ export class DetailGroupComponent {
       event.srcElement.parentElement.firstChild.value = this.interaction.group_from.description;
     }
     
+  }
+
+  public selectImage = (event:any) => {
+
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    
+    if (file){
+
+
+
+      this.uploadService.uploadImageUser(event.srcElement.files[0])
+        .then(resp => {
+          console.log(resp);
+        })
+        .catch((resp:any) => 
+          console.log(resp)
+        )
+
+    }else{
+      console.log('No hay archivo seleccionado');
+      
+    }
+
+
+
+
   }
 
 }

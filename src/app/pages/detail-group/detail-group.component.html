@@ -9,7 +9,21 @@
     <form autocomplete="off">
       <div class="form-group">
         <label for="">Imagen</label>
-        <input type="file" (change)="selectImage($event)">
+
+        <ng-container *ngIf="imgTemp; else elseImgTemp">
+          <div class="image-temp">
+            <img [src]="imgTemp" alt="" (click)="onPressInputFile()">
+          </div>
+          <button class="btn btn-primary" (click)="saveImage($event)">Guardar imagen</button>
+        </ng-container>
+        <ng-template #elseImgTemp>
+          <button class="btn btn-primary" (click)="onPressInputFile()">Seleccionar una imagen</button>
+        </ng-template>
+        
+        
+        
+        <input type="file" (change)="selectImage($event)" accept="image/png, image/jpeg, image/jpg" #refInputFile hidden>
+        
       </div>
       <div class="form-group">
         <label for="">Nombre del grupo</label>

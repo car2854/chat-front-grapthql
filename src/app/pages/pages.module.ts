@@ -10,6 +10,7 @@ import { ComponentsModule } from '../components/components.module';
 import { GroupComponent } from './group/group.component';
 import { ParticipantsComponent } from './participants/participants.component';
 import { DetailGroupComponent } from './detail-group/detail-group.component';
+import { UserProfileDetailsComponent } from './user-profile-details/user-profile-details.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { DetailGroupComponent } from './detail-group/detail-group.component';
     GroupComponent,
     ParticipantsComponent,
     DetailGroupComponent,
+    UserProfileDetailsComponent,
   ],
   imports: [
     CommonModule,

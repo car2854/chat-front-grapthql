@@ -130,3 +130,14 @@ textarea:focus, input:focus{
     margin-top: 5px;
   }
 }
+
+.image-temp{
+  max-width: 300px;
+  max-height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+  img{
+    width: 100%;
+  }
+}
+

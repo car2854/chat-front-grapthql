@@ -140,7 +140,13 @@ const FIND_GROUP = gql`
         description,
         created_at,
         allow_image,
-        only_mod_host
+        only_mod_host,
+        image{
+          id,
+          name,
+          dir,
+          created_at
+        }
       }
     }
   }`

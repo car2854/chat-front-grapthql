@@ -5,6 +5,7 @@ import { DetailGroupComponent } from './detail-group/detail-group.component';
 import { GroupComponent } from './group/group.component';
 import { PagesComponent } from './pages.component';
 import { ParticipantsComponent } from './participants/participants.component';
+import { UserProfileDetailsComponent } from './user-profile-details/user-profile-details.component';
 import { UserComponent } from './user/user.component';
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'group/:id', component: GroupComponent},
       {path: 'participants/:id', component: ParticipantsComponent},
       {path: 'group/detail/:id', component: DetailGroupComponent},
+      {path: 'user/profile/:id', component: UserProfileDetailsComponent},
     ]
   }
 ];

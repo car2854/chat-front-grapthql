@@ -115,6 +115,10 @@ export class PagesComponent {
     else refData.classList.add('hidden');
   }
 
+  public closeOptions = (event:any) => {
+    event.target.parentElement.classList.add('hidden');
+  }
+
   public logout = (event:any) => {
     event.target.parentElement.classList.add('hidden');
     this.authService.logout();

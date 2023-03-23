@@ -1,0 +1,11 @@
+<p>user-profile-details works!</p>
+
+<label>Imagen</label>
+<input type="file" accept="image/png, image/jpeg, image/jpg" (change)="updateImage($event)">
+
+<label for="">Estado</label>
+<input type="text" class="form-control">
+
+<label for="">Uid del usuario</label>
+<input type="text" class="form-control" [value]="user.uid_profile" disabled>
+<button class="btn btn-primary" (click)="updateUid()">Cambiar el Uid</button>

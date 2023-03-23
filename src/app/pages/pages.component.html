@@ -24,6 +24,7 @@
         <ul class="options hidden">
           <li (click)="newUser($event)">Nuevo Usuario</li>
           <li (click)="createGroup($event)">Crear grupo</li>
+          <li (click)="closeOptions($event)" [routerLink]="['user/profile', user.id]">Editar Perfil</li>
           <li (click)="logout($event)">Cerrar sesion</li>
         </ul>
       </div>

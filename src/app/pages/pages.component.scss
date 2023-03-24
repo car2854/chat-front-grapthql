@@ -37,6 +37,18 @@ $color-border: #222D34;
             width: 100%;
           }
         }
+        .profile-name-status{
+          h3{
+            margin: 0px;
+            padding: 0px;
+          }
+          p{
+            margin: 0px;
+            padding: 0px;
+            opacity: 0.5;
+            font-size: 14px;
+          }
+        }
       }
       .options-user{
         button{

@@ -9,6 +9,7 @@ const LOGIN = gql`
       id,
       name,
       email,
+      status,
       created_at,
       token,
       uid_profile,
@@ -32,6 +33,7 @@ const REGISTER = gql`
       id,
       name,
       email,
+      status,
       password,
       created_at,
       token,
@@ -52,6 +54,7 @@ const RENEWTOKEN = gql`
       id,
       name,
       email,
+      status,
       created_at,
       token,
       uid_profile,
@@ -167,7 +170,8 @@ const NEW_MODETAROR = gql`
       user_to{
         id,
         name,
-        email
+        email,
+        status
       },
       group_from{
         id,
@@ -189,7 +193,8 @@ const CLEAR_ROLE = gql`
       user_to{
         id,
         name,
-        email
+        email,
+        status,
       },
       group_from{
         id,
@@ -261,12 +266,26 @@ const UPDATE_UID_PROFILE = gql`
       id,
       name,
       email,
+      status,
       created_at,
       uid_profile
     }
   }
 `;
 
+const UPDATE_STATUS_PROFILE = gql`
+  mutation UpdateStatusUser($status: String!){
+    updateStatusUser(status: $status){
+      id,
+      name,
+      status,
+      email,
+      created_at,
+      uid_profile
+    } 
+  }
+`;
 
 
-export {UPDATE_UID_PROFILE, UPDATE_GROUP, LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}
+
+export {UPDATE_STATUS_PROFILE, UPDATE_UID_PROFILE, UPDATE_GROUP, LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}

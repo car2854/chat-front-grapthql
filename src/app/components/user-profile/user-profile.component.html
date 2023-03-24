@@ -42,7 +42,7 @@
     </ng-container>
     <ng-template #elseGroup>
       <h1>{{interaction.user_from.id === user.id ? interaction.user_to.name : interaction.user_from.name}}</h1>
-      <p>Estado</p>
+      <p>{{interaction.user_from.id === user.id ? interaction.user_to.status : interaction.user_from.status}}</p>
     </ng-template>
     
   </div>

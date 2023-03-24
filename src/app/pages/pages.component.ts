@@ -28,7 +28,7 @@ export class PagesComponent {
   public groupSelected = '';
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private interactionSerice: InteractionService,
     private route: ActivatedRoute,
     private router: Router,

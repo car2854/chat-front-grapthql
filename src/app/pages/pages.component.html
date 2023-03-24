@@ -14,7 +14,10 @@
           </ng-template>
           
         </div>
-        <h3>{{user.name}}</h3>
+        <div class="profile-name-status">
+          <h3>{{user.name}}</h3>
+          <p>{{authService.user.status}}</p>
+        </div>
       </div>
 
       <div class="options-user">
@@ -64,7 +67,7 @@
               <div class="contact" [ngClass]="{'active': interaction.group!.id === groupSelected}">
                 <div class="photo">
                   <ng-container *ngIf="interaction.group!.image; else elseNoImageGroup">
-                    
+                    <img [src]="interaction.group!.image.dir" alt="">
                   </ng-container>
                   <ng-template #elseNoImageGroup>
                     <div class="no-image">

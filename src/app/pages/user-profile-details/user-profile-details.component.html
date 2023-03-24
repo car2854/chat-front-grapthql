@@ -1,10 +1,11 @@
-<p>user-profile-details works!</p>
-
 <label>Imagen</label>
 <input type="file" accept="image/png, image/jpeg, image/jpg" (change)="updateImage($event)">
 
 <label for="">Estado</label>
-<input type="text" class="form-control">
+<div class="form-group">
+  <input type="text" class="form-control" [value]="user.status">
+  <button (click)="updateStatus($event)" class="btn btn-primary">UpdateStatus</button>
+</div>
 
 <label for="">Uid del usuario</label>
 <input type="text" class="form-control" [value]="user.uid_profile" disabled>

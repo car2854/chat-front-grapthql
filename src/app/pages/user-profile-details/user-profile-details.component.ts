@@ -22,6 +22,8 @@ export class UserProfileDetailsComponent {
 
   ngOnInit(): void {
     this.user = this.authService.user;
+    console.log(this.user);
+    
   }
 
   public updateImage = (event:any) => {
@@ -56,4 +58,16 @@ export class UserProfileDetailsComponent {
       })
   }
 
+
+  public updateStatus = (event:any) => {
+    const value = event.srcElement.parentElement.children[0].value;
+    this.userService.updateStatusUser({status: value.trim()})
+      .subscribe((result: MutationResult<any>) => {
+        if (result.errors){
+          console.log(result.errors);
+        }else{
+          this.authService.user = result.data.updateStatusUser;
+        }
+      })
+  }
 }

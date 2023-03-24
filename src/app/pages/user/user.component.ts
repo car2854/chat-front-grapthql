@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloError } from '@apollo/client/core';
@@ -19,6 +19,8 @@ import { StatusService } from 'src/app/services/status.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
+
+  @ViewChild('inputFile') inputFile!: ElementRef<HTMLInputElement>
 
   public chats: ChatModule[] = [];
   public user!: UserModule;
@@ -123,4 +125,8 @@ export class UserComponent {
     this.chatForm.reset(); 
   }
 
+
+  public selectImage = () => {
+    this.inputFile.nativeElement.click();
+  }
 }

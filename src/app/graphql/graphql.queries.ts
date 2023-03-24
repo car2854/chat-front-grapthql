@@ -11,6 +11,7 @@ query GetUsersInteractions($userName: String){
         id,
         name,
         email,
+        status,
         created_at,
         image{
           id,
@@ -23,6 +24,7 @@ query GetUsersInteractions($userName: String){
         id,
         name,
         email,
+        status,
         created_at,
         image{
           id,
@@ -55,9 +57,10 @@ query FindUserInteraction($id: Int!){
       status_from,
       status_to,
       user_from {
-        id
-        name
-        email
+        id,
+        name,
+        email,
+        status,
         password,
         image{
           id,
@@ -67,9 +70,10 @@ query FindUserInteraction($id: Int!){
         }
       }
       user_to {
-        id
-        name
-        email
+        id,
+        name,
+        email,
+        status,
         password,
         image{
           id,
@@ -90,14 +94,16 @@ const USER_INTERACTION_BY_UID_PROFILE = gql`
       status_from,
       status_to,
       user_from {
-        id
-        name
-        email
+        id,
+        name,
+        email,
+        status,
         password
       }
       user_to {
-        id
-        name
+        id,
+        name,
+        status
         email
         password
       }
@@ -132,7 +138,8 @@ const FIND_GROUP = gql`
       user_to{
         id,
         name,
-        email
+        email,
+        status
       },
       group_from{
         id,
@@ -177,7 +184,8 @@ const All_USER_WITHIN_GROUP = gql`
       user_to{
         id,
         name,
-        email
+        email,
+        status
       },
       status_from,
       status_to

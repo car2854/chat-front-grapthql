@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
+import { SocketIoModule } from 'ngx-socket-io';
+import { environment } from './helpers/data-helpers';
+import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
+
+const config: SocketIoConfig = { url: environment.base_socket, options: {} };
 
 @NgModule({
   declarations: [
@@ -21,7 +26,8 @@ import { RouterModule } from '@angular/router';
     PagesModule,
     AuthModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

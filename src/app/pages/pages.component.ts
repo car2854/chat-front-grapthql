@@ -9,6 +9,7 @@ import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
 import { AuthService } from '../services/auth.service';
 import { InteractionService } from '../services/interaction.service';
+import { UserSocketService } from '../services/socket/user-socket.service';
 
 export let browserRefresh = false;
 
@@ -32,6 +33,8 @@ export class PagesComponent {
     private interactionSerice: InteractionService,
     private route: ActivatedRoute,
     private router: Router,
+
+    private userSocketService: UserSocketService,
   ){
 
   }
@@ -54,6 +57,10 @@ export class PagesComponent {
       });
     
     this.verifyRouter();
+
+
+
+    this.userSocketService.emitJoinUser({user_id: this.user.id});
   }
 
   private verifyRouter = () => {

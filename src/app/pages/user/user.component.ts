@@ -1,9 +1,10 @@
 import { Component, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApolloError } from '@apollo/client/core';
+import { ApolloError, Observable } from '@apollo/client/core';
 import { ApolloQueryResult } from '@apollo/client/core/types';
 import { MutationResult } from 'apollo-angular';
+import { Subscription } from 'rxjs';
 import { StatusInteractionEnum } from 'src/app/enum/status-interaction';
 import { ChatModule } from 'src/app/models/chat.module';
 import { InteractionModule } from 'src/app/models/interaction.module';
@@ -11,6 +12,7 @@ import UserModule from 'src/app/models/user.module';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { MessageSocketService } from 'src/app/services/socket/message-socket.service';
 import { StatusService } from 'src/app/services/status.service';
 
 @Component({
@@ -26,6 +28,8 @@ export class UserComponent {
   public user!: UserModule;
   public interaction!: InteractionModule;
 
+  private socketSubcription!: Subscription;
+
   public chatForm = this.fb.group({
     message: [,[Validators.required]]
   });
@@ -36,7 +40,8 @@ export class UserComponent {
     private authService: AuthService,
     private statusService: StatusService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private messageSocket: MessageSocketService
   ){
     // Cada vez que cambia de ruta, la pagina vuelve a recargar los datos, esto pasa ya que no estoy cambiando de ruta, solo un id, es decir, no cambio los componenetes
     // solo cambia su id.
@@ -47,11 +52,25 @@ export class UserComponent {
 
   }
 
+  
   ngOnInit(): void {
     
     const id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
 
     this.user = this.authService.user;
+
+
+    this.socketSubcription = this.messageSocket.handleMessage().subscribe({
+      
+      next : (value) => {
+        console.log(value);
+      },
+      error : (err) => {
+        console.log(err);
+      },
+    });
+
+
 
     this.interactionService.getUserInteracion(id)
       .subscribe((result: ApolloQueryResult<any>) => {
@@ -80,6 +99,12 @@ export class UserComponent {
       })
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.socketSubcription.unsubscribe();
+  }
+
   public isBlocked = () : boolean => {
     if (
       (this.interaction.user_from.id === this.user.id && this.interaction.status_to === StatusInteractionEnum.locked) || 
@@ -100,6 +125,8 @@ export class UserComponent {
   }
   
   public sendMessage = () => {
+
+
     if (this.chatForm.invalid) return;
     
     const data = {
@@ -116,7 +143,12 @@ export class UserComponent {
             data.user_from,
             data.user_to
           );
-          this.chats = [newChat, ...this.chats]
+          this.chats = [newChat, ...this.chats];
+
+          this.messageSocket.emitMessage({message: this.chatForm.get('message')?.value || '', user_from: this.user.id, user_to: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id});
+          
+
+
         },
         error(err) {
           console.log(err);

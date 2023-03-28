@@ -62,8 +62,20 @@ export class UserComponent {
 
     this.socketSubcription = this.messageSocket.handleMessage().subscribe({
       
-      next : (value) => {
-        console.log(value);
+      next : (value: any) => {
+
+        const {message , message_id, user_from, user_to } = value[0];
+
+        if (this.chats.some((chat: ChatModule) => chat.id === message_id )) return;
+
+        const newChat: ChatModule = new ChatModule(
+          message_id,
+          message,
+          user_from,
+          user_to
+        );
+        this.chats = [newChat, ...this.chats];
+
       },
       error : (err) => {
         console.log(err);
@@ -145,7 +157,7 @@ export class UserComponent {
           );
           this.chats = [newChat, ...this.chats];
 
-          this.messageSocket.emitMessage({message: this.chatForm.get('message')?.value || '', user_from: this.user.id, user_to: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id});
+          this.messageSocket.emitMessage({message: data.message, message_id: data.id, user_from: this.user.id, user_to: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id});
           
 
 

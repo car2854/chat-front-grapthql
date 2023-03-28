@@ -193,8 +193,26 @@ const All_USER_WITHIN_GROUP = gql`
   }
 `;
 
+const GET_GROUP_INTERACTIONS = gql`
+  query GetGroupInteractions{
+    
+    getGroupInteraction{
+      id,
+      group_from{
+        id,
+        title
+      },
+      user_to{
+        id,
+        name
+      }
+    }
+    
+  }
+`;
 
 
 
 
-export { USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP, USER_CHAT_GROUP, All_USER_WITHIN_GROUP }
+
+export { GET_GROUP_INTERACTIONS, USERS_INTERACTION, USER_INTERACTION, USER_CHAT, USER_INTERACTION_BY_UID_PROFILE, FIND_GROUP, USER_CHAT_GROUP, All_USER_WITHIN_GROUP }

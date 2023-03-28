@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GroupModule } from 'src/app/models/group.module';
 import { WebsocketService } from '../websocket.service';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class UserSocketService {
     private webSocket: WebsocketService
   ) { }
   
-  emitJoinUser = (payload: {user_id: number}) => {
+  emitJoinUser = (payload: {user_id: number, group?: GroupModule[]}) => {
     this.webSocket.emit('join-user', payload)
   }
   

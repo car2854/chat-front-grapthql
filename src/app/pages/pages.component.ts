@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
 import UserInteractions from '../interfaces/user-interactions';
+import { GroupModule } from '../models/group.module';
 import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
 import { AuthService } from '../services/auth.service';
@@ -54,13 +55,21 @@ export class PagesComponent {
         // console.log(result.data.loading);
         // console.log(result.error);
         
+        const groupData: GroupModule[] = [];
+
+        this.interactions.forEach((interaction: InteractionModule) => {
+          if (interaction.group_from != null) groupData.push(interaction.group_from);
+        });
+
+        this.userSocketService.emitJoinUser({user_id: this.user.id, group: groupData});
+
+
       });
     
     this.verifyRouter();
 
 
 
-    this.userSocketService.emitJoinUser({user_id: this.user.id});
   }
 
   private verifyRouter = () => {

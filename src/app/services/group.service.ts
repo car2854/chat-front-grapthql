@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ADD_NEW_USER_GROUP, CLEAR_ROLE, CREARTE_GROUP, NEW_MODETAROR, REMOVE_FROM_GROUP, UPDATE_GROUP } from '../graphql/graphql.mutation';
-import { All_USER_WITHIN_GROUP } from '../graphql/graphql.queries';
+import { All_USER_WITHIN_GROUP, GET_GROUP_INTERACTIONS } from '../graphql/graphql.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -102,8 +102,19 @@ export class GroupService {
   public updateGroup = (data:{ idGroup: string, title?: string, description?: string, allow_image?: boolean, only_mod_host?: boolean}) => {
     return this.apollo.mutate({
       mutation: UPDATE_GROUP,
-      variables: data
-      ,
+      variables: data,
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    });
+  }
+
+  public getInteractionOnlyGroup = () => {
+    return this.apollo.query({
+      query: GET_GROUP_INTERACTIONS,
       context: {
         headers: {
           // "Content-Type": "application/json",

@@ -11,7 +11,7 @@ export class MessageSocketService {
     private webSocket: WebsocketService
   ) { }
 
-  public emitMessage = (payload:{message:string, message_id: number ,user_from: number, user_to:number}) => {
+  public emitMessage = (payload:{message:string, message_id: number ,user_from: number, user_to:UserModule}) => {
     this.webSocket.emit('message', payload);
   }
 
@@ -25,5 +25,9 @@ export class MessageSocketService {
 
   public handleMessageGroup = () => {
     return this.webSocket.listen('aswner-message-group');
+  }
+
+  public handleNotification = () => {
+    return this.webSocket.listen('notification');
   }
 }

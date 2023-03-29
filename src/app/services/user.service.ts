@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { UPDATE_STATUS_PROFILE, UPDATE_UID_PROFILE } from '../graphql/graphql.mutation';
+import { UPDATE_ID_SECTION, UPDATE_STATUS_PROFILE, UPDATE_UID_PROFILE } from '../graphql/graphql.mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,21 @@ export class UserService {
 
     return this.apollo.mutate({
       mutation: UPDATE_STATUS_PROFILE,
+      variables: data,
+      context: {
+        headers: {
+          // "Content-Type": "application/json",
+          "token": this.token
+        }
+      }
+    });
+
+  }
+
+  public updateIdSection = (data: {idSection:string}) => {
+
+    return this.apollo.mutate({
+      mutation: UPDATE_ID_SECTION,
       variables: data,
       context: {
         headers: {

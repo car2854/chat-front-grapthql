@@ -9,6 +9,6 @@ export default class UserModule{
     public status: string,
     public created_at: Date,
     public uid_profile: string,
-    public image: ImageModule
+    public image: ImageModule,
   ){}
 }

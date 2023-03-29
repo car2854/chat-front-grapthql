@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Socket } from 'ngx-socket-io';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class WebsocketService {
   public socketStatus = false;
 
   constructor(
-    private socket: Socket
+    private socket: Socket,
+    private userService: UserService
   ) {
     this.checkStatus();
   }

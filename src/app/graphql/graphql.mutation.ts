@@ -13,6 +13,7 @@ const LOGIN = gql`
       created_at,
       token,
       uid_profile,
+      id_section,
       image{
         id,
         name,
@@ -38,6 +39,7 @@ const REGISTER = gql`
       created_at,
       token,
       uid_profile,
+      id_section,
       image{
         id,
         name,
@@ -58,6 +60,7 @@ const RENEWTOKEN = gql`
       created_at,
       token,
       uid_profile,
+      id_section,
       image{
         id,
         name,
@@ -114,11 +117,13 @@ const CREARTE_CHAT = gql`
       message,
       user_from{
         id,
-        name
+        name,
+        id_section
       },
       user_to{
         id,
-        name
+        name,
+        id_section
       }
     }
   }
@@ -171,7 +176,8 @@ const NEW_MODETAROR = gql`
         id,
         name,
         email,
-        status
+        status,
+        id_section,
       },
       group_from{
         id,
@@ -195,6 +201,7 @@ const CLEAR_ROLE = gql`
         name,
         email,
         status,
+        id_section,
       },
       group_from{
         id,
@@ -267,6 +274,7 @@ const UPDATE_UID_PROFILE = gql`
       name,
       email,
       status,
+      id_section,
       created_at,
       uid_profile
     }
@@ -280,6 +288,21 @@ const UPDATE_STATUS_PROFILE = gql`
       name,
       status,
       email,
+      id_section,
+      created_at,
+      uid_profile
+    } 
+  }
+`;
+
+const UPDATE_ID_SECTION = gql`
+  mutation UpdateIdSection($idSection: String!){
+    updateIdSection(idSection: $idSection){
+      id,
+      name,
+      status,
+      email,
+      id_section,
       created_at,
       uid_profile
     } 
@@ -288,4 +311,4 @@ const UPDATE_STATUS_PROFILE = gql`
 
 
 
-export {UPDATE_STATUS_PROFILE, UPDATE_UID_PROFILE, UPDATE_GROUP, LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}
+export {UPDATE_ID_SECTION, UPDATE_STATUS_PROFILE, UPDATE_UID_PROFILE, UPDATE_GROUP, LOGIN, REGISTER, RENEWTOKEN, LOQUED_USER, CLEAR_STATUS_USER, CREARTE_CHAT, CREARTE_GROUP, CREARTE_CHAT_GROUP, NEW_MODETAROR, CLEAR_ROLE, ADD_NEW_USER_GROUP, REMOVE_FROM_GROUP}

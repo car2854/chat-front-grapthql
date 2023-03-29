@@ -15,5 +15,8 @@ export class UserSocketService {
     this.webSocket.emit('join-user', payload)
   }
   
+  public handleIdSection = () => {
+    return this.webSocket.listen('id-section');
+  }
 
 }

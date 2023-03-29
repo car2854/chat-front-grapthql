@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
-import { Subscription } from 'rxjs';
+import { MutationResult } from 'apollo-angular';
+import { Subscribable, Subscriber, Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { StatusInteractionEnum } from '../enum/status-interaction';
 import UserInteractions from '../interfaces/user-interactions';
@@ -10,7 +11,11 @@ import { InteractionModule } from '../models/interaction.module';
 import UserModule from '../models/user.module';
 import { AuthService } from '../services/auth.service';
 import { InteractionService } from '../services/interaction.service';
+import { MessageSocketService } from '../services/socket/message-socket.service';
 import { UserSocketService } from '../services/socket/user-socket.service';
+import { UserService } from '../services/user.service';
+
+// import sound from '../../assets/audio/notification.mp3';
 
 export let browserRefresh = false;
 
@@ -29,13 +34,16 @@ export class PagesComponent {
   public idSelected = 0;
   public groupSelected = '';
 
+  private socketSubscription: Subscription[] = [];
+
   constructor(
     public authService: AuthService,
     private interactionSerice: InteractionService,
     private route: ActivatedRoute,
     private router: Router,
-
+    private userService: UserService,
     private userSocketService: UserSocketService,
+    private messageSocketService: MessageSocketService
   ){
 
   }
@@ -68,8 +76,47 @@ export class PagesComponent {
     
     this.verifyRouter();
 
+    
+    this.socketSubscription.push(
+      
+      this.userSocketService.handleIdSection().subscribe({
+        error : (err) => {
+          console.log(err);
+        },
+        next : (value:any) => {
+          this.userService.updateIdSection({idSection: value}).subscribe(
+            (result:MutationResult<any>) => {
+              if (result.errors) console.log(result.errors);
+              else console.log(result.data);
+            }
+          )
+        },
+      })
 
+    )
 
+    this.socketSubscription.push(
+
+      this.messageSocketService.handleNotification().subscribe({
+        error(err) {
+          console.log(err);
+        },
+        next:(value:any) => {
+          const {message, message_id, user_from, user_to, group_to } = value[0];
+          console.log(user_from);
+          if (user_from.id != this.user.id){
+            const audio = new Audio('../../assets/audio/notification.mp3');
+            audio.play();
+          }
+        },
+      })
+
+    )
+
+  }
+
+  ngOnDestroy(): void {
+    this.socketSubscription.forEach((subscription: Subscription) => subscription.unsubscribe());
   }
 
   private verifyRouter = () => {

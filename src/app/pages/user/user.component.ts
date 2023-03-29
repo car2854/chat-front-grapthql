@@ -157,9 +157,7 @@ export class UserComponent {
           );
           this.chats = [newChat, ...this.chats];
 
-          this.messageSocket.emitMessage({message: data.message, message_id: data.id, user_from: this.user.id, user_to: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id});
-          
-
+          this.messageSocket.emitMessage({message: data.message, message_id: data.id, user_from: this.user.id, user_to: (data.user_from.id === this.user.id)? data.user_to : data.user_from});
 
         },
         error(err) {

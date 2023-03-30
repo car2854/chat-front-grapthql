@@ -10,3 +10,21 @@ $color-border: #222D34;
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 1100px) {
+  .auth-page{
+    padding-inline: 30%;
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-page{
+    padding-inline: 15%;
+  }
+}
+
+@media (max-width: 500px) {
+  .auth-page{
+    padding-inline: 2%;
+  }
+}

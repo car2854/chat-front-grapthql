@@ -27,9 +27,8 @@ export class LoginComponent {
 
   login(){
 
-    
     if (this.loginForm.invalid) return;
-    
+        
     this.authService.login(this.loginForm.value).subscribe({
       complete: () => this.router.navigateByUrl('/main'),
       error: (err) => {
@@ -37,6 +36,7 @@ export class LoginComponent {
       }
     });
 
+    
   }
 
 }

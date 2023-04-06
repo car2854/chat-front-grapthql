@@ -39,6 +39,15 @@ $color1: #222E35;
     padding-inline: 8px;
     overflow: hidden;
 
+
+    .uploadImageData{
+      position: absolute;
+      bottom: 50px;
+      height: 100px;
+      width: 100%;
+      background-color: red;
+    }
+
     small{
       width: 100%;
       text-align: center;

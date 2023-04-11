@@ -55,14 +55,17 @@
         <ng-container *ngIf="isActive()"> 
 
           <!-- TODO: Codigo aqui -->
-          <div class="uploadImageData">
-
+          <div class="uploadImageData" [ngClass]="{'hidden': !imgTemp}">
+            <img [src]="imgTemp" alt="">
+            <button (click)="clearImage()">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
 
           <input type="text" formControlName="message">
           <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
           <button type="button"><i class="fa-solid fa-image" (click)="selectImage()"></i></button>
-          <input type="file" accept="image/png, image/jpeg, image/jpg" hidden #inputFile>
+          <input type="file" accept="image/png, image/jpeg, image/jpg" hidden #inputFile (change)="changeImage($event)">
         </ng-container>
         
 

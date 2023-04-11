@@ -24,6 +24,9 @@ export class UserComponent {
 
   @ViewChild('inputFile') inputFile!: ElementRef<HTMLInputElement>
 
+  public imgTemp: any;
+  public file!: File;
+
   public chats: ChatModule[] = [];
   public user!: UserModule;
   public interaction!: InteractionModule;
@@ -170,5 +173,28 @@ export class UserComponent {
 
   public selectImage = () => {
     this.inputFile.nativeElement.click();
+  }
+
+  public changeImage = (event:any) => {
+
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    if (file){
+
+      this.file = file;
+
+      const reader = new FileReader();
+      const url64 = reader.readAsDataURL(this.file);
+
+      reader.onloadend = () => {
+        this.imgTemp = reader.result;
+      }
+
+    }
+
+  }
+
+  public clearImage = () => {
+    this.imgTemp = null;
   }
 }

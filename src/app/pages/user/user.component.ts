@@ -141,33 +141,44 @@ export class UserComponent {
   
   public sendMessage = () => {
 
-
     if (this.chatForm.invalid) return;
     
-    const data = {
-      ...this.chatForm.value,
-      userTo: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id
+    if (this.imgTemp){
+      
+      // TODO: Enviar mensaje con imagen
+
+    }else{
+
+      // Enviar mensaje sin imagen
+
+      const data = {
+        ...this.chatForm.value,
+        userTo: (this.interaction.user_from.id === this.user.id)? this.interaction.user_to.id : this.interaction.user_from.id
+      }
+      this.chatService.createChat(data)
+        .subscribe({
+          next : (value:any) => {
+            const data = value.data.createChat;
+            const newChat: ChatModule = new ChatModule(
+              data.id,
+              data.message,
+              data.user_from,
+              data.user_to
+            );
+            this.chats = [newChat, ...this.chats];
+  
+            this.messageSocket.emitMessage({message: data.message, message_id: data.id, user_from: this.user.id, user_to: (data.user_from.id === this.user.id)? data.user_to : data.user_from});
+  
+          },
+          error(err) {
+            console.log(err);
+          },
+        })
+      this.chatForm.reset(); 
+
     }
-    this.chatService.createChat(data)
-      .subscribe({
-        next : (value:any) => {
-          const data = value.data.createChat;
-          const newChat: ChatModule = new ChatModule(
-            data.id,
-            data.message,
-            data.user_from,
-            data.user_to
-          );
-          this.chats = [newChat, ...this.chats];
 
-          this.messageSocket.emitMessage({message: data.message, message_id: data.id, user_from: this.user.id, user_to: (data.user_from.id === this.user.id)? data.user_to : data.user_from});
-
-        },
-        error(err) {
-          console.log(err);
-        },
-      })
-    this.chatForm.reset(); 
+    
   }
 
 

@@ -1,12 +1,26 @@
-<label>Imagen</label>
-<input type="file" accept="image/png, image/jpeg, image/jpg" (change)="updateImage($event)">
+<div class="form-data">
+  
+  
 
-<label for="">Estado</label>
-<div class="form-group">
-  <input type="text" class="form-control" [value]="user.status">
-  <button (click)="updateStatus($event)" class="btn btn-primary">UpdateStatus</button>
+  <label>Imagen</label>
+  <input type="file" accept="image/png, image/jpeg, image/jpg" (change)="updateImage($event)">
+  
+  <div class="form-group">
+    <label for="">Estado</label>
+    <div class="form-control">
+      <input type="text" class="form-control" [value]="user.status">
+      <i class="fa-solid fa-pen-to-square" (click)="editClick($event)"></i>
+      <i class="fa-solid fa-floppy-disk" (click)="saveClick($event)" hidden></i>
+      <i class="fa-solid fa-xmark" (click)="cancelClick($event)" hidden></i>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="">Uid del usuario</label>
+    <div class="form-control">
+      <input type="text" class="form-control" [value]="user.uid_profile" disabled>
+      <i class="fa-solid fa-rotate-right" (click)="updateUid()"></i>
+    </div>
+  </div>
+
 </div>
-
-<label for="">Uid del usuario</label>
-<input type="text" class="form-control" [value]="user.uid_profile" disabled>
-<button class="btn btn-primary" (click)="updateUid()">Cambiar el Uid</button>

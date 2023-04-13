@@ -70,4 +70,43 @@ export class UserProfileDetailsComponent {
         }
       })
   }
+
+  public editClick = (event:any) => {
+    event.srcElement.parentElement.firstChild.disabled = false;
+    event.srcElement.parentElement.firstChild.classList.add('select')
+    event.srcElement.parentElement.children[1].hidden = true;
+    event.srcElement.parentElement.children[2].hidden = false;
+    event.srcElement.parentElement.children[3].hidden = false;
+  }
+  
+  public saveClick = (event:any) => {
+    event.srcElement.parentElement.firstChild.disabled = true;
+    event.srcElement.parentElement.firstChild.classList.remove('select')
+    event.srcElement.parentElement.children[1].hidden = false;
+    event.srcElement.parentElement.children[2].hidden = true;
+    event.srcElement.parentElement.children[3].hidden = true;
+
+    const value = event.srcElement.parentElement.children[0].value;
+    this.userService.updateStatusUser({status: value.trim()})
+      .subscribe((result: MutationResult<any>) => {
+        if (result.errors){
+          console.log(result.errors);
+        }else{
+          this.authService.user = result.data.updateStatusUser;
+          this.user = result.data.updateStatusUser;
+        }
+      })
+    
+  }
+
+  public cancelClick = (event:any) => {
+    event.srcElement.parentElement.firstChild.disabled = true;
+    event.srcElement.parentElement.firstChild.classList.remove('select')
+    event.srcElement.parentElement.children[1].hidden = false;
+    event.srcElement.parentElement.children[2].hidden = true;
+    event.srcElement.parentElement.children[3].hidden = true;
+
+    event.srcElement.parentElement.children[0].value = this.user.status;
+    
+  }
 }

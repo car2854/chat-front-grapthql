@@ -14,6 +14,7 @@ import { InteractionService } from '../services/interaction.service';
 import { MessageSocketService } from '../services/socket/message-socket.service';
 import { UserSocketService } from '../services/socket/user-socket.service';
 import { UserService } from '../services/user.service';
+import { DataService } from '../services/data/data.service';
 
 // import sound from '../../assets/audio/notification.mp3';
 
@@ -29,7 +30,6 @@ export class PagesComponent {
   @ViewChild('refModalCreateGroup') refModalCreateGroup!: ElementRef<HTMLDivElement>;
 
   public user!: UserModule;
-  public interactions: InteractionModule[] = [];
 
   public idSelected = 0;
   public groupSelected = '';
@@ -43,7 +43,8 @@ export class PagesComponent {
     private router: Router,
     private userService: UserService,
     private userSocketService: UserSocketService,
-    private messageSocketService: MessageSocketService
+    private messageSocketService: MessageSocketService,
+    public dataService: DataService
   ){
 
   }
@@ -57,7 +58,7 @@ export class PagesComponent {
       .subscribe((result: ApolloQueryResult<any>) => {
         
         
-        this.interactions = result.data.getUsersInteractions;
+        this.dataService.interactions = result.data.getUsersInteractions;
         // console.log(this.interactions);
         
         // console.log(result.data.loading);
@@ -65,7 +66,7 @@ export class PagesComponent {
         
         const groupData: GroupModule[] = [];
 
-        this.interactions.forEach((interaction: InteractionModule) => {
+        this.dataService.interactions.forEach((interaction: InteractionModule) => {
           if (interaction.group_from != null) groupData.push(interaction.group_from);
         });
 
@@ -93,7 +94,7 @@ export class PagesComponent {
         },
       })
 
-    )
+    ),
 
     this.socketSubscription.push(
 
@@ -111,7 +112,22 @@ export class PagesComponent {
         },
       })
 
+    ),
+
+    this.socketSubscription.push(
+      this.userSocketService.handleNewGroup().subscribe({
+        error(err) {
+          console.log(err);
+        },
+        next(value:any) {
+          console.log('hola como estas');
+          console.log(value);
+          
+        },
+      })
     )
+
+
 
   }
 
@@ -194,7 +210,7 @@ export class PagesComponent {
     this.interactionSerice.getUsersInteractions(userName)
       .subscribe((result: ApolloQueryResult<any>) => {
 
-        this.interactions = result.data.getUsersInteractions;
+        this.dataService.interactions = result.data.getUsersInteractions;
         // console.log(result.data.loading);
         // console.log(result.error);
         
@@ -224,7 +240,7 @@ export class PagesComponent {
             if (result.error){
               console.log(result.error);
             }else{
-              this.interactions = [result.data.findUserInteractionByUidUser, ...this.interactions];
+              this.dataService.interactions = [result.data.findUserInteractionByUidUser, ...this.dataService.interactions];
               // console.log(result.data.loading);
             }
 

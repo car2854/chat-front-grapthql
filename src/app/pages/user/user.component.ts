@@ -143,7 +143,10 @@ export class UserComponent {
 
     if (this.chatForm.invalid) return;
     
+      
+
     if (this.imgTemp){
+      
       
       // TODO: Enviar mensaje con imagen
 
